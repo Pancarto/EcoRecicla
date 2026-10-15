@@ -1,0 +1,351 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Iniciar sesión | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="auth-page auth-login-page">
+
+
+    <!-- =====================================================
+         LADO VISUAL
+    ====================================================== -->
+
+    <section class="auth-visual">
+
+        <div class="auth-visual-decoration auth-decoration-one"></div>
+        <div class="auth-visual-decoration auth-decoration-two"></div>
+        <div class="auth-visual-decoration auth-decoration-three"></div>
+
+
+        <div class="auth-visual-content">
+
+            <div class="auth-brand-mark">
+                ♻
+            </div>
+
+
+            <span class="auth-eyebrow">
+                ECORECICLA
+            </span>
+
+
+            <h1>
+                Tu reciclaje
+                empieza aquí.
+            </h1>
+
+
+            <p>
+                Ingresa a tu cuenta para continuar con tus registros,
+                consultar tus puntos y aprovechar las recompensas
+                disponibles.
+            </p>
+
+
+            <div class="auth-benefits">
+
+                <div class="auth-benefit">
+
+                    <span class="auth-benefit-icon">
+                        ♻
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Registra
+                        </strong>
+
+                        <small>
+                            tus reciclajes
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <span class="auth-benefit-icon">
+                        ★
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Acumula
+                        </strong>
+
+                        <small>
+                            puntos
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="auth-benefit">
+
+                    <span class="auth-benefit-icon">
+                        🎁
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Canjea
+                        </strong>
+
+                        <small>
+                            recompensas
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-eco-quote">
+
+                <span>
+                    “
+                </span>
+
+                <p>
+                    Cada material que recuperamos es una oportunidad
+                    para reducir residuos y aprovechar mejor nuestros recursos.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-visual-footer">
+
+            <span>
+                ♻ RECICLAR
+            </span>
+
+            <span>
+                ·
+            </span>
+
+            <span>
+                ACUMULAR
+            </span>
+
+            <span>
+                ·
+            </span>
+
+            <span>
+                RECOMPENSAR
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LADO FORMULARIO
+    ====================================================== -->
+
+    <section class="auth-form-area">
+
+
+        <div class="auth-form-wrapper">
+
+
+            <div class="auth-mobile-logo">
+
+                <span>
+                    ♻
+                </span>
+
+                <strong>
+                    EcoRecicla
+                </strong>
+
+            </div>
+
+
+
+            <div class="auth-heading">
+
+                <span class="auth-form-label">
+                    BIENVENIDO DE NUEVO
+                </span>
+
+
+                <h2>
+                    Iniciar sesión
+                </h2>
+
+
+                <p>
+                    Ingresa tus datos para acceder a tu cuenta.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORMULARIO ORIGINAL
+                 NO MODIFICAR NOMBRES NI RUTA
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('auth.login') }}"
+                class="auth-form"
+            >
+
+
+                <!-- CORREO -->
+
+                <div class="auth-field">
+
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            @
+                        </span>
+
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="correo@ejemplo.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONTRASEÑA -->
+
+                <div class="auth-field">
+
+                    <div class="auth-label-row">
+
+                        <label for="password">
+                            Contraseña
+                        </label>
+
+                    </div>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ●
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Ingresa tu contraseña"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+
+                    <span>
+                        Iniciar sesión
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- REGISTRO -->
+
+            <div class="auth-switch">
+
+                <span>
+                    ¿No tienes una cuenta?
+                </span>
+
+
+                <a href="{{ url_for('auth.registro') }}">
+                    Regístrate aquí
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+
+            <!-- SEGURIDAD / INFORMACIÓN -->
+
+            <div class="auth-security">
+
+                <span class="auth-security-icon">
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Acceso seguro
+                    </strong>
+
+                    <p>
+                        Tus datos de acceso son utilizados únicamente
+                        para gestionar tu cuenta EcoRecicla.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,809 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Registrar reciclaje | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="recycle-page">
+
+
+    <!-- =====================================================
+         CABECERA PRINCIPAL
+         SOLO VISUAL
+    ====================================================== -->
+
+    <section class="recycle-hero">
+
+        <div class="recycle-hero-copy">
+
+            <div class="recycle-kicker">
+                <span class="recycle-kicker-dot"></span>
+                ECORECICLA · REGISTRO DE RECICLAJE
+            </div>
+
+
+            <h1>
+                Dale una segunda vida
+                a tus materiales.
+            </h1>
+
+
+            <p>
+                Registra el material recibido por la máquina
+                EcoRecicla y convierte cada acción de reciclaje
+                en una contribución para el aprovechamiento
+                responsable de los residuos.
+            </p>
+
+
+            <div class="recycle-hero-pills">
+
+                <div class="recycle-hero-pill">
+                    <span>♻</span>
+                    <div>
+                        <strong>Recicla</strong>
+                        <small>material aprovechable</small>
+                    </div>
+                </div>
+
+
+                <div class="recycle-hero-pill">
+                    <span>⚖</span>
+                    <div>
+                        <strong>Registra</strong>
+                        <small>el peso recibido</small>
+                    </div>
+                </div>
+
+
+                <div class="recycle-hero-pill">
+                    <span>★</span>
+                    <div>
+                        <strong>Acumula</strong>
+                        <small>puntos según el material</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             ELEMENTO VISUAL
+        ================================================== -->
+
+        <div class="recycle-hero-art">
+
+            <div class="recycle-art-ring recycle-ring-one"></div>
+            <div class="recycle-art-ring recycle-ring-two"></div>
+            <div class="recycle-art-ring recycle-ring-three"></div>
+
+
+            <div class="recycle-art-core">
+
+                <div class="recycle-art-symbol">
+                    ♻
+                </div>
+
+                <span>
+                    RECICLA
+                </span>
+
+            </div>
+
+
+            <div class="recycle-floating recycle-floating-top">
+
+                <span>🌱</span>
+
+                <div>
+                    <strong>Impacto positivo</strong>
+                    <small>Cada acción cuenta</small>
+                </div>
+
+            </div>
+
+
+            <div class="recycle-floating recycle-floating-bottom">
+
+                <span>★</span>
+
+                <div>
+                    <strong>Puntos</strong>
+                    <small>por material reciclado</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ZONA PRINCIPAL
+    ====================================================== -->
+
+    <section class="recycle-content-grid">
+
+
+        <!-- =================================================
+             FORMULARIO ORIGINAL
+             NO CAMBIAR CONEXIONES
+        ================================================== -->
+
+        <div class="recycle-register-card">
+
+
+            <div class="recycle-card-heading">
+
+                <div>
+
+                    <span class="recycle-label">
+                        NUEVO REGISTRO
+                    </span>
+
+                    <h2>
+                        Registrar reciclaje
+                    </h2>
+
+                    <p>
+                        Selecciona el material y registra el peso
+                        recibido por la máquina EcoRecicla.
+                    </p>
+
+                </div>
+
+
+                <div class="recycle-card-number">
+                    01
+                </div>
+
+            </div>
+
+
+            <div class="recycle-register-divider"></div>
+
+
+            <!-- =================================================
+                 FORMULARIO ORIGINAL
+                 LAS VARIABLES Y NOMBRES SE CONSERVAN
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('reciclaje.reciclar') }}"
+                class="recycle-form"
+            >
+
+
+                <!-- MATERIAL -->
+
+                <div class="recycle-field">
+
+                    <label for="id_tipo_material">
+
+                        <span class="recycle-field-number">
+                            01
+                        </span>
+
+                        Material
+
+                    </label>
+
+
+                    <div class="recycle-input-box">
+
+                        <span class="recycle-input-icon">
+                            ♻
+                        </span>
+
+
+                        <select
+                            id="id_tipo_material"
+                            name="id_tipo_material"
+                            required
+                        >
+
+                            <option value="">
+                                Selecciona un material
+                            </option>
+
+
+                            {% for material in materiales %}
+
+                                <option
+                                    value="{{ material.id_tipo_material }}"
+                                >
+
+                                    {{ material.nombre }}
+                                    -
+                                    {{ material.puntos_por_unidad }}
+                                    puntos/KG
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <span class="recycle-select-arrow">
+                            ↓
+                        </span>
+
+                    </div>
+
+
+                    <small class="recycle-field-help">
+                        Selecciona el material correspondiente
+                        al reciclaje recibido.
+                    </small>
+
+                </div>
+
+
+
+                <!-- PESO -->
+
+                <div class="recycle-field">
+
+                    <label for="peso">
+
+                        <span class="recycle-field-number">
+                            02
+                        </span>
+
+                        Peso (KG)
+
+                    </label>
+
+
+                    <div class="recycle-input-box">
+
+                        <span class="recycle-input-icon">
+                            ⚖
+                        </span>
+
+
+                        <input
+                            type="number"
+                            id="peso"
+                            name="peso"
+                            min="0.001"
+                            step="0.001"
+                            placeholder="Ingresa el peso"
+                            required
+                        >
+
+
+                        <span class="recycle-input-suffix">
+                            KG
+                        </span>
+
+                    </div>
+
+
+                    <small class="recycle-field-help">
+                        Registra el peso recibido utilizando
+                        el valor correspondiente.
+                    </small>
+
+                </div>
+
+
+
+                <!-- BOTÓN ORIGINAL -->
+
+                <button
+                    type="submit"
+                    class="recycle-submit-button"
+                >
+
+                    <span class="recycle-submit-symbol">
+                        ♻
+                    </span>
+
+                    <span>
+                        Registrar reciclaje
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </button>
+
+
+            </form>
+
+
+            <!-- AVISO VISUAL -->
+
+            <div class="recycle-form-note">
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Verifica que el material y el peso sean correctos
+                    antes de registrar la operación.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PANEL INFORMACIÓN
+             SOLO TEXTO / DISEÑO
+        ================================================== -->
+
+        <aside class="recycle-guide-card">
+
+
+            <div class="recycle-guide-header">
+
+                <span class="recycle-label">
+                    GUÍA RÁPIDA
+                </span>
+
+                <div class="recycle-guide-badge">
+                    3 PASOS
+                </div>
+
+            </div>
+
+
+            <h2>
+                ¿Cómo funciona
+                el reciclaje?
+            </h2>
+
+
+            <p class="recycle-guide-description">
+                Separar correctamente los residuos facilita su
+                recuperación y permite que los materiales puedan
+                volver a incorporarse al ciclo productivo.
+            </p>
+
+
+
+            <!-- PASO 1 -->
+
+            <div class="recycle-guide-step">
+
+                <div class="recycle-step-icon">
+                    01
+                </div>
+
+                <div>
+
+                    <strong>
+                        Separa
+                    </strong>
+
+                    <p>
+                        Identifica los materiales aprovechables
+                        y mantenlos separados de los residuos
+                        que no pueden recuperarse.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASO 2 -->
+
+            <div class="recycle-guide-step">
+
+                <div class="recycle-step-icon">
+                    02
+                </div>
+
+                <div>
+
+                    <strong>
+                        Prepara
+                    </strong>
+
+                    <p>
+                        Procura entregar los materiales en buenas
+                        condiciones para facilitar su aprovechamiento.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASO 3 -->
+
+            <div class="recycle-guide-step">
+
+                <div class="recycle-step-icon">
+                    03
+                </div>
+
+                <div>
+
+                    <strong>
+                        Registra
+                    </strong>
+
+                    <p>
+                        Selecciona el material, registra su peso
+                        y completa la operación de reciclaje.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="recycle-guide-tip">
+
+                <span>
+                    💡
+                </span>
+
+                <div>
+
+                    <strong>
+                        Consejo EcoRecicla
+                    </strong>
+
+                    <p>
+                        Separar los residuos desde el lugar donde
+                        se generan ayuda a conservar mejor los
+                        materiales aprovechables.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MATERIALES / INFORMACIÓN
+         NO SON CAMPOS NI DATOS DEL SISTEMA
+    ====================================================== -->
+
+    <section class="recycle-materials-section">
+
+
+        <div class="recycle-section-heading">
+
+            <div>
+
+                <span class="recycle-label">
+                    APROVECHAMIENTO
+                </span>
+
+                <h2>
+                    Conoce mejor los materiales
+                </h2>
+
+            </div>
+
+
+            <p>
+                Una correcta separación es uno de los primeros
+                pasos para lograr un proceso de reciclaje más eficiente.
+            </p>
+
+        </div>
+
+
+
+        <div class="recycle-material-info-grid">
+
+
+            <!-- PLÁSTICO -->
+
+            <article class="recycle-material-info">
+
+                <div class="recycle-material-top">
+
+                    <div class="recycle-material-icon">
+                        🧴
+                    </div>
+
+                    <span>
+                        01
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Plástico
+                </h3>
+
+
+                <p>
+                    Muchos envases y recipientes plásticos pueden
+                    ser recuperados y transformados en nuevos productos.
+                </p>
+
+
+                <div class="recycle-material-tag">
+                    Aprovechable
+                </div>
+
+            </article>
+
+
+
+            <!-- PAPEL -->
+
+            <article class="recycle-material-info material-info-blue">
+
+                <div class="recycle-material-top">
+
+                    <div class="recycle-material-icon">
+                        📄
+                    </div>
+
+                    <span>
+                        02
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Papel y cartón
+                </h3>
+
+
+                <p>
+                    Separar cajas, hojas y otros productos de papel
+                    permite recuperar fibras para nuevos procesos.
+                </p>
+
+
+                <div class="recycle-material-tag">
+                    Aprovechable
+                </div>
+
+            </article>
+
+
+
+            <!-- VIDRIO -->
+
+            <article class="recycle-material-info material-info-gold">
+
+                <div class="recycle-material-top">
+
+                    <div class="recycle-material-icon">
+                        🍾
+                    </div>
+
+                    <span>
+                        03
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Vidrio
+                </h3>
+
+
+                <p>
+                    El vidrio puede ser recuperado y procesado
+                    nuevamente, reduciendo la necesidad de fabricar
+                    material nuevo.
+                </p>
+
+
+                <div class="recycle-material-tag">
+                    Aprovechable
+                </div>
+
+            </article>
+
+
+
+            <!-- METAL -->
+
+            <article class="recycle-material-info material-info-dark">
+
+                <div class="recycle-material-top">
+
+                    <div class="recycle-material-icon">
+                        🥫
+                    </div>
+
+                    <span>
+                        04
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Metal
+                </h3>
+
+
+                <p>
+                    Las latas y otros metales pueden recuperarse
+                    y utilizarse nuevamente en diferentes procesos.
+                </p>
+
+
+                <div class="recycle-material-tag">
+                    Aprovechable
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BLOQUE IMPACTO
+    ====================================================== -->
+
+    <section class="recycle-impact-section">
+
+
+        <div class="recycle-impact-visual">
+
+            <div class="recycle-impact-circle circle-one"></div>
+            <div class="recycle-impact-circle circle-two"></div>
+
+
+            <div class="recycle-impact-center">
+
+                <span>
+                    ♻
+                </span>
+
+                <strong>
+                    3
+                </strong>
+
+                <small>
+                    ACCIONES
+                </small>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="recycle-impact-copy">
+
+            <span class="recycle-label">
+                MÁS QUE UN REGISTRO
+            </span>
+
+
+            <h2>
+                Cada registro representa
+                una acción responsable.
+            </h2>
+
+
+            <p>
+                Reciclar no consiste únicamente en separar residuos.
+                También significa facilitar que los materiales puedan
+                ser recuperados, clasificados y aprovechados nuevamente.
+            </p>
+
+
+            <div class="recycle-impact-list">
+
+                <div>
+
+                    <span>✓</span>
+
+                    <p>
+                        Reducir la cantidad de residuos que llegan
+                        a los rellenos sanitarios.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <span>✓</span>
+
+                    <p>
+                        Aprovechar materiales que todavía tienen
+                        utilidad.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <span>✓</span>
+
+                    <p>
+                        Promover hábitos de consumo y separación
+                        más responsables.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA FINAL
+         VISUAL
+    ====================================================== -->
+
+    <section class="recycle-final-card">
+
+        <div class="recycle-final-decoration final-decoration-one"></div>
+        <div class="recycle-final-decoration final-decoration-two"></div>
+
+
+        <div class="recycle-final-icon">
+            🌱
+        </div>
+
+
+        <div class="recycle-final-copy">
+
+            <span>
+                TU ACCIÓN CUENTA
+            </span>
+
+            <h2>
+                Recicla hoy.
+                Impacta mañana.
+            </h2>
+
+            <p>
+                Una correcta separación comienza con una pequeña
+                acción y puede generar un gran cambio.
+            </p>
+
+        </div>
+
+
+        <div class="recycle-final-mark">
+            ♻
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

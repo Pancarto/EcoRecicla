@@ -1,0 +1,272 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Usuarios | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-list-page admin-users-page">
+
+    <section class="admin-list-hero">
+
+        <div>
+
+            <span class="admin-list-kicker">
+                ADMINISTRACIÓN · PERSONAS
+            </span>
+
+            <h1>
+                Usuarios
+                <strong>registrados.</strong>
+            </h1>
+
+            <p>
+                Consulta la información disponible de las
+                personas registradas en EcoRecicla.
+            </p>
+
+        </div>
+
+
+        <div class="admin-list-hero-icon">
+            👥
+        </div>
+
+    </section>
+
+
+    <section class="admin-list-toolbar">
+
+        <div>
+
+            <span>
+                DIRECTORIO
+            </span>
+
+            <h2>
+                Usuarios del sistema
+            </h2>
+
+        </div>
+
+
+        <div class="admin-toolbar-actions">
+
+            <a
+                href="{{ url_for('admin.panel') }}"
+                class="admin-toolbar-button"
+            >
+                ⌂ Principal
+            </a>
+
+        </div>
+
+    </section>
+
+
+    {% if usuarios %}
+
+    <section class="admin-table-card">
+
+        <div class="admin-table-top">
+
+            <div>
+
+                <span>
+                    REGISTRO DE USUARIOS
+                </span>
+
+                <h3>
+                    Información disponible
+                </h3>
+
+            </div>
+
+            <div class="admin-count">
+                {{ usuarios|length }}
+                <small>usuarios</small>
+            </div>
+
+        </div>
+
+
+        <div class="admin-table-scroll">
+
+            <table class="admin-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Documento
+                        </th>
+
+                        <th>
+                            Nombre
+                        </th>
+
+                        <th>
+                            Correo
+                        </th>
+
+                        <th>
+                            Rol
+                        </th>
+
+                        <th>
+                            Estado
+                        </th>
+
+                        <th>
+                            Registro
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for usuario in usuarios %}
+
+                    <tr>
+
+                        <td>
+
+                            <span class="admin-document">
+                                {{ usuario.numero_documento }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="admin-person">
+
+                                <span>
+                                    {{ usuario.nombres[:1] }}
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        {{ usuario.nombres }}
+                                        {{ usuario.apellidos }}
+                                    </strong>
+
+                                    <small>
+                                        Usuario EcoRecicla
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="admin-email">
+                                {{ usuario.correo }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="admin-role">
+                                {{ usuario.rol }}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            {% if usuario.estado %}
+
+                            <span class="admin-status active">
+                                <i></i>
+                                Activo
+                            </span>
+
+                            {% else %}
+
+                            <span class="admin-status inactive">
+                                <i></i>
+                                Inactivo
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="admin-date">
+                                {{ usuario.fecha_registro }}
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+    {% else %}
+
+    <section class="admin-empty">
+
+        <div>
+            👥
+        </div>
+
+        <span>
+            DIRECTORIO VACÍO
+        </span>
+
+        <h2>
+            No existen usuarios registrados.
+        </h2>
+
+        <p>
+            Cuando existan cuentas registradas,
+            la información aparecerá en este espacio.
+        </p>
+
+    </section>
+
+    {% endif %}
+
+
+    <section class="admin-list-footer">
+
+        <span>
+            ♻
+        </span>
+
+        <p>
+            EcoRecicla · Gestión organizada de la comunidad
+        </p>
+
+    </section>
+
+</div>
+
+{% endblock %}

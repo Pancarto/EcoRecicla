@@ -1,0 +1,482 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Mi historial | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="history-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="history-hero">
+
+        <div class="history-hero-content">
+
+            <div class="history-eyebrow">
+                <span></span>
+                ACTIVIDAD DE RECICLAJE
+            </div>
+
+            <h1>
+                Tu impacto,
+                <span>registrado.</span>
+            </h1>
+
+            <p>
+                Consulta cada vez que has contribuido al proceso
+                de reciclaje, los materiales entregados y los puntos
+                que has obtenido en EcoRecicla.
+            </p>
+
+            <div class="history-hero-actions">
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="history-primary-button"
+                >
+                    <span>♻️</span>
+                    Registrar reciclaje
+                </a>
+
+                <a
+                    href="{{ url_for('main.dashboard') }}"
+                    class="history-secondary-button"
+                >
+                    ← Volver al dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESUMEN VISUAL -->
+
+        <div class="history-hero-card">
+
+            <div class="history-hero-card-top">
+
+                <span>
+                    ACTIVIDAD
+                </span>
+
+                <div class="history-live">
+                    <i></i>
+                    REGISTRADA
+                </div>
+
+            </div>
+
+
+            <div class="history-big-number">
+
+                {% if reciclajes %}
+                    {{ reciclajes|length }}
+                {% else %}
+                    0
+                {% endif %}
+
+            </div>
+
+
+            <p>
+                registros de reciclaje
+            </p>
+
+
+            <div class="history-mini-line">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CABECERA
+    ====================================================== -->
+
+    <section class="history-heading">
+
+        <div>
+
+            <span class="history-section-label">
+                MIS REGISTROS
+            </span>
+
+            <h2>
+                Historial de reciclaje
+            </h2>
+
+            <p>
+                Revisa el detalle de tus entregas y conoce
+                el resultado de cada actividad.
+            </p>
+
+        </div>
+
+
+        {% if reciclajes %}
+
+        <div class="history-count">
+
+            <strong>
+                {{ reciclajes|length }}
+            </strong>
+
+            <span>
+                registros
+            </span>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LISTADO
+    ====================================================== -->
+
+    <section class="history-records">
+
+        {% if reciclajes %}
+
+            <div class="history-list">
+
+                {% for reciclaje in reciclajes %}
+
+                    <article class="history-record">
+
+                        <!-- =================================
+                             INDICADOR
+                        ================================== -->
+
+                        <div class="history-record-marker">
+
+                            <span>
+                                {{ "%02d"|format(loop.index) }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================
+                             INFORMACIÓN PRINCIPAL
+                        ================================== -->
+
+                        <div class="history-record-main">
+
+                            <div class="history-record-type">
+
+                                <span class="history-material-icon">
+                                    ♻️
+                                </span>
+
+                                <span>
+                                    RECICLAJE REGISTRADO
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                {{ reciclaje.codigo_reciclaje }}
+                            </h3>
+
+
+                            <p>
+                                Registro asociado a la máquina
+                                <strong>
+                                    {{ reciclaje.maquina }}
+                                </strong>
+                            </p>
+
+                        </div>
+
+
+                        <!-- =================================
+                             PESO
+                        ================================== -->
+
+                        <div class="history-record-data">
+
+                            <span>
+                                MATERIAL
+                            </span>
+
+                            <strong>
+                                {{ reciclaje.peso_total }}
+                                <small>KG</small>
+                            </strong>
+
+                        </div>
+
+
+                        <!-- =================================
+                             PUNTOS
+                        ================================== -->
+
+                        <div class="history-record-data points">
+
+                            <span>
+                                PUNTOS OBTENIDOS
+                            </span>
+
+                            <strong>
+                                +{{ reciclaje.puntos_obtenidos }}
+                                <small>PTS</small>
+                            </strong>
+
+                        </div>
+
+
+                        <!-- =================================
+                             ESTADO
+                        ================================== -->
+
+                        <div class="history-record-status">
+
+                            <span>
+                                ESTADO
+                            </span>
+
+                            <div class="history-status">
+
+                                <i></i>
+
+                                {{ reciclaje.estado }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             FECHA
+                        ================================== -->
+
+                        <div class="history-record-date">
+
+                            <span>
+                                FECHA
+                            </span>
+
+                            <strong>
+                                {{ reciclaje.fecha_reciclaje }}
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- =================================================
+                 ESTADO VACÍO
+            ================================================== -->
+
+            <div class="history-empty">
+
+                <div class="history-empty-art">
+
+                    <div class="history-empty-circle">
+                        ♻️
+                    </div>
+
+                    <span class="history-orbit orbit-one"></span>
+                    <span class="history-orbit orbit-two"></span>
+                    <span class="history-orbit orbit-three"></span>
+
+                </div>
+
+
+                <span class="history-section-label">
+                    AÚN NO HAY REGISTROS
+                </span>
+
+
+                <h2>
+                    Tu historia comienza
+                    con un reciclaje.
+                </h2>
+
+
+                <p>
+                    Cuando registres tu primera entrega,
+                    podrás consultar aquí el material reciclado,
+                    los puntos obtenidos y todos los detalles
+                    de la operación.
+                </p>
+
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="history-empty-button"
+                >
+                    <span>♻️</span>
+                    Registrar mi primer reciclaje
+                    <strong>→</strong>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BLOQUE EDUCATIVO
+    ====================================================== -->
+
+    <section class="history-education">
+
+        <div class="history-education-copy">
+
+            <span class="history-section-label">
+                MÁS QUE UN REGISTRO
+            </span>
+
+            <h2>
+                Cada entrega deja
+                una huella positiva.
+            </h2>
+
+            <p>
+                El historial no solo muestra tus movimientos.
+                También representa tu participación dentro del
+                proceso de aprovechamiento y transformación de
+                materiales reciclables.
+            </p>
+
+        </div>
+
+
+        <div class="history-impact-grid">
+
+            <div class="history-impact-card">
+
+                <div class="history-impact-icon">
+                    ♻️
+                </div>
+
+                <strong>
+                    Recicla
+                </strong>
+
+                <span>
+                    Entrega materiales aprovechables
+                    en los puntos habilitados.
+                </span>
+
+            </div>
+
+
+            <div class="history-impact-card">
+
+                <div class="history-impact-icon blue">
+                    ⚖️
+                </div>
+
+                <strong>
+                    Registra
+                </strong>
+
+                <span>
+                    El sistema registra el peso
+                    y la actividad realizada.
+                </span>
+
+            </div>
+
+
+            <div class="history-impact-card">
+
+                <div class="history-impact-icon">
+                    ⭐
+                </div>
+
+                <strong>
+                    Obtén puntos
+                </strong>
+
+                <span>
+                    Tu actividad puede convertirse
+                    en puntos para futuras recompensas.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CONSEJO
+    ====================================================== -->
+
+    <section class="history-tip">
+
+        <div class="history-tip-icon">
+            💡
+        </div>
+
+
+        <div class="history-tip-content">
+
+            <span>
+                CONSEJO ECO
+            </span>
+
+            <h3>
+                Antes de reciclar, separa correctamente tus materiales.
+            </h3>
+
+            <p>
+                Mantener los materiales limpios, secos y separados
+                facilita su aprovechamiento y mejora el proceso
+                de clasificación.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('reciclaje.reciclar') }}"
+            class="history-tip-button"
+        >
+            Reciclar ahora
+            <span>→</span>
+        </a>
+
+    </section>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,622 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Recompensas | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="rewards-page">
+
+    <!-- =====================================================
+         ENCABEZADO PRINCIPAL
+    ====================================================== -->
+
+    <section class="rewards-hero">
+
+        <div class="rewards-hero-content">
+
+            <div class="rewards-eyebrow">
+                <span class="rewards-eyebrow-dot"></span>
+                CATÁLOGO ECORECICLA
+            </div>
+
+            <h1>
+                Convierte tus puntos
+                <span>en recompensas.</span>
+            </h1>
+
+            <p>
+                Cada vez que reciclas generas puntos que puedes utilizar
+                para obtener beneficios, productos y experiencias de
+                nuestras empresas aliadas.
+            </p>
+
+            <div class="rewards-hero-actions">
+
+                <a
+                    href="{{ url_for('canje.historial') }}"
+                    class="rewards-outline-button"
+                >
+                    <span>🎟️</span>
+                    Ver mis canjes
+                </a>
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="rewards-soft-button"
+                >
+                    <span>♻️</span>
+                    Seguir reciclando
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TARJETA DE PUNTOS
+        ================================================== -->
+
+        <div class="rewards-balance-card">
+
+            <div class="rewards-balance-top">
+
+                <div>
+                    <span class="rewards-balance-label">
+                        MI SALDO
+                    </span>
+
+                    <strong>
+                        Puntos disponibles
+                    </strong>
+                </div>
+
+                <div class="rewards-balance-icon">
+                    ✦
+                </div>
+
+            </div>
+
+
+            <div class="rewards-balance-number">
+
+                {{ saldo.puntos_disponibles }}
+
+                <span>PTS</span>
+
+            </div>
+
+
+            <div class="rewards-balance-divider"></div>
+
+
+            <div class="rewards-balance-bottom">
+
+                <div>
+                    <span>Úsalos para</span>
+                    <strong>canjear beneficios</strong>
+                </div>
+
+                <span class="rewards-balance-arrow">
+                    →
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFORMACIÓN SUPERIOR
+    ====================================================== -->
+
+    <section class="rewards-intro-section">
+
+        <div class="rewards-section-heading">
+
+            <div>
+
+                <span class="rewards-section-label">
+                    ELIGE TU BENEFICIO
+                </span>
+
+                <h2>
+                    Recompensas disponibles
+                </h2>
+
+                <p>
+                    Encuentra una recompensa que se ajuste a tus puntos
+                    y disfruta los beneficios de formar parte de EcoRecicla.
+                </p>
+
+            </div>
+
+
+            <div class="rewards-mini-balance">
+
+                <span>Tu saldo</span>
+
+                <strong>
+                    {{ saldo.puntos_disponibles }}
+                    <small>PTS</small>
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CATÁLOGO
+    ====================================================== -->
+
+    <section class="rewards-catalog-section">
+
+        {% if recompensas %}
+
+            <div class="rewards-grid">
+
+                {% for recompensa in recompensas %}
+
+                    <article
+                        class="reward-card
+                        {% if saldo.puntos_disponibles < recompensa.puntos_requeridos %}
+                            reward-card-locked
+                        {% endif %}"
+                    >
+
+                        <!-- =================================
+                             IMAGEN / ÁREA VISUAL
+                        ================================== -->
+
+                        <div class="reward-card-media">
+
+                            {% if recompensa.imagen %}
+
+                                <img
+                                    src="{{ recompensa.imagen }}"
+                                    alt="{{ recompensa.nombre }}"
+                                    class="reward-image"
+                                >
+
+                            {% else %}
+
+                                <div class="reward-placeholder">
+
+                                    <span>
+                                        🎁
+                                    </span>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <div class="reward-category">
+
+                                {{ recompensa.categoria }}
+
+                            </div>
+
+
+                            {% if recompensa.stock <= 3 %}
+
+                                <div class="reward-stock-warning">
+
+                                    <span></span>
+
+                                    Últimas unidades
+
+                                </div>
+
+                            {% else %}
+
+                                <div class="reward-stock">
+
+                                    {{ recompensa.stock }}
+                                    disponibles
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- =================================
+                             CONTENIDO
+                        ================================== -->
+
+                        <div class="reward-card-body">
+
+                            <div class="reward-company">
+
+                                <span class="reward-company-icon">
+                                    ◈
+                                </span>
+
+                                <span>
+                                    {{ recompensa.empresa or "EcoRecicla" }}
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                {{ recompensa.nombre }}
+                            </h3>
+
+
+                            {% if recompensa.descripcion %}
+
+                                <p class="reward-description">
+
+                                    {{ recompensa.descripcion }}
+
+                                </p>
+
+                            {% else %}
+
+                                <p class="reward-description">
+
+                                    Beneficio disponible para la comunidad
+                                    EcoRecicla.
+
+                                </p>
+
+                            {% endif %}
+
+
+                            <!-- =============================
+                                 PRECIO EN PUNTOS
+                            ============================== -->
+
+                            <div class="reward-price-row">
+
+                                <div>
+
+                                    <span class="reward-price-label">
+                                        VALOR DEL CANJE
+                                    </span>
+
+                                    <strong class="reward-points">
+
+                                        {{ recompensa.puntos_requeridos }}
+
+                                        <small>PTS</small>
+
+                                    </strong>
+
+                                </div>
+
+
+                                {% if saldo.puntos_disponibles >= recompensa.puntos_requeridos %}
+
+                                    <span class="reward-status available">
+                                        ✓ Disponible
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="reward-status locked">
+                                        🔒 Bloqueado
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- =================================
+                                 ACCIÓN
+                            ================================== -->
+
+                            <div class="reward-card-action">
+
+                                {% if recompensa.stock <= 0 %}
+
+                                    <button
+                                        type="button"
+                                        class="reward-button disabled"
+                                        disabled
+                                    >
+                                        Recompensa agotada
+                                    </button>
+
+
+                                {% elif saldo.puntos_disponibles >= recompensa.puntos_requeridos %}
+
+                                    <form
+                                        method="POST"
+                                        action="{{
+                                            url_for(
+                                                'canje.realizar',
+                                                id_recompensa=recompensa.id_recompensa
+                                            )
+                                        }}"
+                                        class="reward-form"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="reward-button"
+                                        >
+
+                                            <span>
+                                                Canjear recompensa
+                                            </span>
+
+                                            <span class="reward-button-arrow">
+                                                →
+                                            </span>
+
+                                        </button>
+
+                                    </form>
+
+
+                                {% else %}
+
+                                    <div class="reward-not-enough">
+
+                                        <div class="reward-not-enough-icon">
+                                            ✦
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                Te faltan
+                                                {{
+                                                    recompensa.puntos_requeridos
+                                                    - saldo.puntos_disponibles
+                                                }}
+                                                puntos
+                                            </strong>
+
+                                            <small>
+                                                Sigue reciclando para desbloquear
+                                                esta recompensa.
+                                            </small>
+
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- =============================================
+                 ESTADO VACÍO
+            ============================================== -->
+
+            <div class="rewards-empty">
+
+                <div class="rewards-empty-icon">
+                    🎁
+                </div>
+
+                <span class="rewards-section-label">
+                    CATÁLOGO TEMPORALMENTE VACÍO
+                </span>
+
+                <h2>
+                    Aún no hay recompensas disponibles
+                </h2>
+
+                <p>
+                    En este momento no tenemos beneficios disponibles.
+                    Vuelve pronto para descubrir nuevas recompensas.
+                </p>
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="rewards-empty-button"
+                >
+                    ♻️ Seguir reciclando
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CÓMO CONSEGUIR MÁS PUNTOS
+    ====================================================== -->
+
+    <section class="rewards-how-section">
+
+        <div class="rewards-how-header">
+
+            <div>
+
+                <span class="rewards-section-label">
+                    ¿QUIERES MÁS PUNTOS?
+                </span>
+
+                <h2>
+                    Reciclar te acerca a tu próxima recompensa.
+                </h2>
+
+            </div>
+
+            <span class="rewards-how-number">
+                01 — 03
+            </span>
+
+        </div>
+
+
+        <div class="rewards-how-grid">
+
+            <div class="reward-how-card">
+
+                <div class="reward-how-number">
+                    01
+                </div>
+
+                <div class="reward-how-icon">
+                    ♻️
+                </div>
+
+                <h3>
+                    Recicla
+                </h3>
+
+                <p>
+                    Lleva tus materiales reciclables a una máquina
+                    EcoRecicla habilitada.
+                </p>
+
+            </div>
+
+
+            <div class="reward-how-card">
+
+                <div class="reward-how-number">
+                    02
+                </div>
+
+                <div class="reward-how-icon">
+                    ✦
+                </div>
+
+                <h3>
+                    Acumula
+                </h3>
+
+                <p>
+                    Cada entrega válida genera puntos de acuerdo
+                    con el material y peso registrado.
+                </p>
+
+            </div>
+
+
+            <div class="reward-how-card">
+
+                <div class="reward-how-number">
+                    03
+                </div>
+
+                <div class="reward-how-icon">
+                    🎁
+                </div>
+
+                <h3>
+                    Canjea
+                </h3>
+
+                <p>
+                    Utiliza tus puntos disponibles para obtener
+                    una recompensa del catálogo.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="rewards-how-footer">
+
+            <div class="rewards-how-footer-icon">
+                🌱
+            </div>
+
+            <div>
+
+                <strong>
+                    Cada punto representa una acción.
+                </strong>
+
+                <span>
+                    Recicla responsablemente y transforma tus hábitos
+                    en beneficios reales.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="rewards-final-cta">
+
+        <div class="rewards-final-decoration rewards-decoration-one"></div>
+        <div class="rewards-final-decoration rewards-decoration-two"></div>
+
+        <div class="rewards-final-content">
+
+            <span class="rewards-section-label">
+                SIGUE SUMANDO IMPACTO
+            </span>
+
+            <h2>
+                Tu próxima recompensa
+                empieza con una botella,
+                una lata o una acción.
+            </h2>
+
+            <p>
+                Sigue reciclando, acumula puntos y descubre todo lo
+                que puedes conseguir mientras contribuyes al cuidado
+                del medio ambiente.
+            </p>
+
+            <div class="rewards-final-actions">
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="rewards-final-primary"
+                >
+                    ♻️ Registrar reciclaje
+                    <span>→</span>
+                </a>
+
+                <a
+                    href="{{ url_for('canje.historial') }}"
+                    class="rewards-final-secondary"
+                >
+                    Ver mis canjes
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,454 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Mis canjes | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="redemptions-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="redemptions-hero">
+
+        <div class="redemptions-hero-copy">
+
+            <div class="redemptions-eyebrow">
+                <span></span>
+                ACTIVIDAD DE TU CUENTA
+            </div>
+
+            <h1>
+                Mis
+                <span>canjes.</span>
+            </h1>
+
+            <p>
+                Consulta las recompensas que has obtenido utilizando
+                tus puntos EcoRecicla y conserva tus códigos para
+                reclamar tus beneficios.
+            </p>
+
+            <div class="redemptions-actions">
+
+                <a
+                    href="{{ url_for('recompensa.catalogo') }}"
+                    class="redemptions-primary-button"
+                >
+                    <span>🎁</span>
+                    Explorar recompensas
+                </a>
+
+                <a
+                    href="{{ url_for('main.dashboard') }}"
+                    class="redemptions-secondary-button"
+                >
+                    ← Mi cuenta
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="redemptions-summary-card">
+
+            <div class="redemptions-summary-icon">
+                🎟️
+            </div>
+
+            <div>
+
+                <span class="redemptions-summary-label">
+                    HISTORIAL
+                </span>
+
+                <strong>
+                    {% if canjes %}
+                        {{ canjes|length }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </strong>
+
+                <small>
+                    canjes realizados
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ENCABEZADO DE HISTORIAL
+    ====================================================== -->
+
+    <section class="redemptions-heading">
+
+        <div>
+
+            <span class="redemptions-section-label">
+                MIS RECOMPENSAS
+            </span>
+
+            <h2>
+                Historial de canjes
+            </h2>
+
+            <p>
+                Aquí encontrarás el detalle de cada recompensa
+                que hayas adquirido.
+            </p>
+
+        </div>
+
+
+        <div class="redemptions-status-legend">
+
+            <span class="redemptions-legend-dot"></span>
+
+            Actividad registrada
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LISTADO
+    ====================================================== -->
+
+    <section class="redemptions-list-section">
+
+        {% if canjes %}
+
+            <div class="redemptions-list">
+
+                {% for canje in canjes %}
+
+                    <article class="redemption-card">
+
+                        <!-- =================================
+                             NÚMERO
+                        ================================== -->
+
+                        <div class="redemption-index">
+
+                            <span>
+                                {{ "%02d"|format(loop.index) }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================
+                             INFORMACIÓN PRINCIPAL
+                        ================================== -->
+
+                        <div class="redemption-main">
+
+                            <div class="redemption-category">
+
+                                <span class="redemption-category-icon">
+                                    🎁
+                                </span>
+
+                                <span>
+                                    RECOMPENSA CANJEADA
+                                </span>
+
+                            </div>
+
+
+                            <h3>
+                                {{ canje.recompensa }}
+                            </h3>
+
+
+                            <div class="redemption-company">
+
+                                <span>
+                                    ◈
+                                </span>
+
+                                {{ canje.empresa or "EcoRecicla" }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             PUNTOS
+                        ================================== -->
+
+                        <div class="redemption-points">
+
+                            <span>
+                                PUNTOS UTILIZADOS
+                            </span>
+
+                            <strong>
+                                {{ canje.puntos_utilizados }}
+                                <small>PTS</small>
+                            </strong>
+
+                        </div>
+
+
+                        <!-- =================================
+                             FECHA
+                        ================================== -->
+
+                        <div class="redemption-date">
+
+                            <span>
+                                FECHA
+                            </span>
+
+                            <strong>
+                                {{ canje.fecha_canje }}
+                            </strong>
+
+                        </div>
+
+
+                        <!-- =================================
+                             ESTADO
+                        ================================== -->
+
+                        <div class="redemption-state">
+
+                            <span class="redemption-state-label">
+                                ESTADO
+                            </span>
+
+                            <span
+                                class="
+                                    redemption-status
+                                    redemption-status-{{ canje.estado|lower|replace(' ', '-') }}
+                                "
+                            >
+                                <i></i>
+                                {{ canje.estado }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- =================================
+                             TICKET
+                        ================================== -->
+
+                        <div class="redemption-ticket">
+
+                            <span>
+                                CÓDIGO
+                            </span>
+
+                            <strong>
+                                {{ canje.codigo_ticket }}
+                            </strong>
+
+                        </div>
+
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <!-- =============================================
+                 ESTADO VACÍO
+            ============================================== -->
+
+            <div class="redemptions-empty">
+
+                <div class="redemptions-empty-visual">
+
+                    <div class="redemptions-empty-circle">
+                        🎟️
+                    </div>
+
+                    <span class="empty-ring ring-a"></span>
+                    <span class="empty-ring ring-b"></span>
+
+                </div>
+
+
+                <span class="redemptions-section-label">
+                    TODAVÍA NO HAY ACTIVIDAD
+                </span>
+
+                <h2>
+                    Tu historial está esperando
+                    tu primer canje.
+                </h2>
+
+                <p>
+                    Cuando utilices tus puntos para obtener una
+                    recompensa, aparecerá aquí junto con su código,
+                    fecha y estado.
+                </p>
+
+
+                <a
+                    href="{{ url_for('recompensa.catalogo') }}"
+                    class="redemptions-empty-button"
+                >
+                    <span>🎁</span>
+                    Ver recompensas
+                    <strong>→</strong>
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFORMACIÓN SOBRE LOS CANJES
+    ====================================================== -->
+
+    <section class="redemptions-info">
+
+        <div class="redemptions-info-copy">
+
+            <span class="redemptions-section-label">
+                ¿CÓMO FUNCIONA?
+            </span>
+
+            <h2>
+                Tu código es la llave
+                de tu recompensa.
+            </h2>
+
+            <p>
+                Después de realizar un canje, EcoRecicla genera
+                un código único asociado a la recompensa.
+                Preséntalo en el establecimiento autorizado
+                para continuar con el proceso de entrega.
+            </p>
+
+        </div>
+
+
+        <div class="redemptions-steps">
+
+            <div class="redemption-step">
+
+                <span class="redemption-step-number">
+                    01
+                </span>
+
+                <div>
+                    <strong>
+                        Elige
+                    </strong>
+
+                    <small>
+                        Selecciona una recompensa disponible.
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="redemption-step">
+
+                <span class="redemption-step-number">
+                    02
+                </span>
+
+                <div>
+                    <strong>
+                        Canjea
+                    </strong>
+
+                    <small>
+                        Utiliza tus puntos disponibles.
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="redemption-step">
+
+                <span class="redemption-step-number">
+                    03
+                </span>
+
+                <div>
+                    <strong>
+                        Presenta
+                    </strong>
+
+                    <small>
+                        Muestra tu código en el establecimiento.
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA FINAL
+    ====================================================== -->
+
+    <section class="redemptions-final">
+
+        <div class="redemptions-final-glow"></div>
+
+        <div class="redemptions-final-content">
+
+            <span class="redemptions-section-label">
+                SIGUE SUMANDO
+            </span>
+
+            <h2>
+                Cada vez estás más cerca
+                de tu próxima recompensa.
+            </h2>
+
+            <p>
+                Recicla, acumula puntos y vuelve al catálogo
+                para descubrir nuevos beneficios.
+            </p>
+
+            <a
+                href="{{ url_for('recompensa.catalogo') }}"
+                class="redemptions-final-button"
+            >
+                Ir al catálogo
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

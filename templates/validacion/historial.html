@@ -1,0 +1,532 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Validar ticket | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="validation-page">
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="validation-hero">
+
+        <div class="validation-hero-copy">
+
+            <div class="validation-kicker">
+                <span></span>
+                CENTRO DE VALIDACIÓN
+            </div>
+
+            <h1>
+                Verifica una
+                <strong>recompensa.</strong>
+            </h1>
+
+            <p>
+                Comprueba el código presentado por el usuario
+                antes de realizar la entrega de la recompensa.
+                La validación permite mantener cada operación
+                clara y controlada.
+            </p>
+
+            <div class="validation-trust-row">
+
+                <span>
+                    ✓ Operación segura
+                </span>
+
+                <span>
+                    ✓ Comprobación inmediata
+                </span>
+
+                <span>
+                    ✓ Registro de entrega
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="validation-hero-art">
+
+            <div class="validation-ring ring-a"></div>
+            <div class="validation-ring ring-b"></div>
+
+            <div class="validation-ticket-visual">
+
+                <div class="validation-ticket-top">
+
+                    <span>
+                        ECORECICLA
+                    </span>
+
+                    <b>
+                        ♻
+                    </b>
+
+                </div>
+
+                <div class="validation-ticket-line"></div>
+
+                <div class="validation-ticket-symbol">
+                    🎫
+                </div>
+
+                <strong>
+                    VALIDAR
+                </strong>
+
+                <small>
+                    TICKET DE RECOMPENSA
+                </small>
+
+            </div>
+
+            <div class="validation-floating-check">
+                ✓
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTENEDOR DE VALIDACIÓN
+    ====================================================== -->
+
+    <section class="validation-workspace">
+
+        <div class="validation-form-card">
+
+            <div class="validation-card-heading">
+
+                <div class="validation-card-icon">
+                    🎫
+                </div>
+
+                <div>
+
+                    <span>
+                        PASO 01
+                    </span>
+
+                    <h2>
+                        Ingresa el código
+                    </h2>
+
+                    <p>
+                        Introduce exactamente el código
+                        que aparece en el ticket del usuario.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{{ url_for('validacion.validar') }}"
+                class="validation-form"
+            >
+
+                <label for="codigo_ticket">
+                    Código del ticket
+                </label>
+
+                <div class="validation-input-wrap">
+
+                    <span>
+                        #
+                    </span>
+
+                    <input
+                        type="text"
+                        id="codigo_ticket"
+                        name="codigo_ticket"
+                        placeholder="ECO-XXXXXXXX"
+                        maxlength="30"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+                <small class="validation-input-help">
+                    El código se encuentra en el comprobante
+                    generado después del canje.
+                </small>
+
+
+                <button
+                    type="submit"
+                    class="validation-submit"
+                >
+
+                    <span>
+                        🔎
+                    </span>
+
+                    Validar ticket
+
+                    <b>
+                        →
+                    </b>
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <aside class="validation-info-card">
+
+            <div class="validation-info-number">
+                01
+            </div>
+
+            <span class="validation-info-label">
+                ANTES DE ENTREGAR
+            </span>
+
+            <h3>
+                Comprueba los datos
+            </h3>
+
+            <p>
+                Una validación correcta permite comprobar
+                que el ticket corresponde a una recompensa
+                registrada en EcoRecicla.
+            </p>
+
+
+            <div class="validation-info-list">
+
+                <div>
+                    <span>✓</span>
+                    <p>Revisa el código presentado.</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>Comprueba la información mostrada.</p>
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    <p>Confirma la entrega cuando corresponda.</p>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+    <!-- =====================================================
+         RESULTADO DE VALIDACIÓN
+    ====================================================== -->
+
+    {% if ticket %}
+
+    <section class="validated-ticket-section">
+
+        <div class="validated-ticket-heading">
+
+            <div>
+
+                <span class="validation-kicker">
+                    RESULTADO
+                </span>
+
+                <h2>
+                    Ticket encontrado
+                </h2>
+
+            </div>
+
+            <div class="validated-status">
+                ✓ TICKET VÁLIDO
+            </div>
+
+        </div>
+
+
+        <div class="validated-ticket-grid">
+
+
+            <div class="validated-main-card">
+
+                <div class="validated-code">
+
+                    <span>
+                        CÓDIGO
+                    </span>
+
+                    <strong>
+                        {{ ticket.codigo_ticket }}
+                    </strong>
+
+                </div>
+
+
+                <div class="validated-data-grid">
+
+                    <div class="validated-data">
+
+                        <span>
+                            USUARIO
+                        </span>
+
+                        <strong>
+                            {{ ticket.usuario_nombre }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="validated-data">
+
+                        <span>
+                            RECOMPENSA
+                        </span>
+
+                        <strong>
+                            {{ ticket.recompensa }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="validated-data">
+
+                        <span>
+                            PUNTOS UTILIZADOS
+                        </span>
+
+                        <strong>
+                            {{ ticket.puntos_utilizados }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="validated-data">
+
+                        <span>
+                            FECHA
+                        </span>
+
+                        <strong>
+                            {{ ticket.fecha_canje }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="validated-data">
+
+                        <span>
+                            ESTADO
+                        </span>
+
+                        <strong class="validated-green">
+                            {{ ticket.estado }}
+                        </strong>
+
+                    </div>
+
+
+                    {% if ticket.empresa %}
+
+                    <div class="validated-data">
+
+                        <span>
+                            EMPRESA ALIADA
+                        </span>
+
+                        <strong>
+                            {{ ticket.empresa }}
+                        </strong>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                {% if ticket.estado == "GENERADO" %}
+
+                <form
+                    method="POST"
+                    action="{{
+                        url_for(
+                            'validacion.entregar',
+                            codigo_ticket=ticket.codigo_ticket
+                        )
+                    }}"
+                    class="delivery-form"
+                >
+
+                    <div class="delivery-warning">
+
+                        <span>
+                            🎁
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Recompensa pendiente de entrega
+                            </strong>
+
+                            <small>
+                                Confirma únicamente después de
+                                comprobar los datos anteriores.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="delivery-button"
+                    >
+
+                        <span>
+                            ✓
+                        </span>
+
+                        Confirmar entrega
+
+                        <b>
+                            →
+                        </b>
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="validated-side-card">
+
+                <div class="validated-side-icon">
+                    ♻
+                </div>
+
+                <span>
+                    OPERACIÓN ECO
+                </span>
+
+                <h3>
+                    Una entrega validada
+                    cierra el ciclo.
+                </h3>
+
+                <p>
+                    El usuario recicla, acumula puntos,
+                    realiza un canje y finalmente recibe
+                    la recompensa correspondiente.
+                </p>
+
+                <div class="validated-cycle">
+
+                    <span>RECICLA</span>
+                    <i>→</i>
+                    <span>CANJEA</span>
+                    <i>→</i>
+                    <span>RECIBE</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         NAVEGACIÓN
+    ====================================================== -->
+
+    <section class="validation-navigation">
+
+        <a
+            href="{{ url_for('validacion.historial') }}"
+            class="validation-nav-card"
+        >
+
+            <span>
+                📋
+            </span>
+
+            <div>
+
+                <strong>
+                    Historial de entregas
+                </strong>
+
+                <small>
+                    Consulta las operaciones registradas.
+                </small>
+
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </a>
+
+
+        <a
+            href="{{ url_for('main.dashboard') }}"
+            class="validation-nav-card validation-nav-main"
+        >
+
+            <span>
+                ⌂
+            </span>
+
+            <div>
+
+                <strong>
+                    Principal
+                </strong>
+
+                <small>
+                    Volver al panel principal.
+                </small>
+
+            </div>
+
+            <b>
+                →
+            </b>
+
+        </a>
+
+    </section>
+
+</div>
+
+{% endblock %}

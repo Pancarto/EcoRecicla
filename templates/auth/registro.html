@@ -1,0 +1,670 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Crear cuenta | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="auth-page auth-register-page">
+
+
+    <!-- =====================================================
+         LADO VISUAL
+    ====================================================== -->
+
+    <section class="auth-visual auth-register-visual">
+
+        <div class="auth-visual-decoration auth-decoration-one"></div>
+        <div class="auth-visual-decoration auth-decoration-two"></div>
+        <div class="auth-visual-decoration auth-decoration-three"></div>
+
+
+        <div class="auth-visual-content">
+
+            <div class="auth-brand-mark">
+                ♻
+            </div>
+
+
+            <span class="auth-eyebrow">
+                ÚNETE A ECORECICLA
+            </span>
+
+
+            <h1>
+                Convierte tus
+                residuos en impacto.
+            </h1>
+
+
+            <p>
+                Crea tu cuenta y comienza a participar en el sistema
+                de reciclaje y recompensas de EcoRecicla.
+            </p>
+
+
+            <div class="auth-register-stats">
+
+                <div>
+
+                    <strong>
+                        01
+                    </strong>
+
+                    <span>
+                        Registra
+                        <small>tu reciclaje</small>
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        02
+                    </strong>
+
+                    <span>
+                        Acumula
+                        <small>tus puntos</small>
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        03
+                    </strong>
+
+                    <span>
+                        Disfruta
+                        <small>tus recompensas</small>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="auth-eco-quote">
+
+                <span>
+                    +
+                </span>
+
+                <p>
+                    Una cuenta te permite mantener organizados
+                    tus registros y consultar el progreso de tus
+                    actividades dentro de EcoRecicla.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="auth-visual-footer">
+
+            <span>
+                ECO
+            </span>
+
+            <span>
+                ·
+            </span>
+
+            <span>
+                RECICLA
+            </span>
+
+            <span>
+                ·
+            </span>
+
+            <span>
+                RECOMPENSA
+
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FORMULARIO DE REGISTRO
+    ====================================================== -->
+
+    <section class="auth-form-area auth-register-area">
+
+
+        <div class="auth-register-wrapper">
+
+
+            <div class="auth-mobile-logo">
+
+                <span>
+                    ♻
+                </span>
+
+                <strong>
+                    EcoRecicla
+                </strong>
+
+            </div>
+
+
+
+            <div class="auth-heading">
+
+                <span class="auth-form-label">
+                    CREAR CUENTA
+                </span>
+
+
+                <h2>
+                    Únete a EcoRecicla
+                </h2>
+
+
+                <p>
+                    Completa tus datos para crear tu cuenta.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FORMULARIO ORIGINAL
+                 TODAS LAS VARIABLES SE CONSERVAN
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('auth.registro') }}"
+                class="auth-form auth-register-form"
+            >
+
+
+                <!-- =============================================
+                     DOCUMENTO
+                ============================================== -->
+
+                <div class="auth-form-section-title">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Identificación
+                        </strong>
+
+                        <small>
+                            Datos de identificación personal
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-two-columns">
+
+
+                    <!-- TIPO DOCUMENTO -->
+
+                    <div class="auth-field">
+
+                        <label for="id_tipo_documento">
+                            Tipo de documento
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                ID
+                            </span>
+
+
+                            <select
+                                id="id_tipo_documento"
+                                name="id_tipo_documento"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona...
+                                </option>
+
+
+                                {% for tipo in tipos_documento %}
+
+                                    <option
+                                        value="{{ tipo.id_tipo_documento }}"
+                                    >
+
+                                        {{ tipo.nombre }}
+                                        ({{ tipo.abreviatura }})
+
+                                    </option>
+
+                                {% endfor %}
+
+                            </select>
+
+
+                            <span class="auth-select-arrow">
+                                ↓
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NUMERO DOCUMENTO -->
+
+                    <div class="auth-field">
+
+                        <label for="numero_documento">
+                            Número de documento
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                #
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="numero_documento"
+                                name="numero_documento"
+                                placeholder="Número"
+                                autocomplete="off"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     DATOS PERSONALES
+                ============================================== -->
+
+                <div class="auth-form-section-title">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Información personal
+                        </strong>
+
+                        <small>
+                            Cuéntanos un poco sobre ti
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-two-columns">
+
+
+                    <!-- NOMBRES -->
+
+                    <div class="auth-field">
+
+                        <label for="nombres">
+                            Nombres
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                A
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="nombres"
+                                name="nombres"
+                                placeholder="Tus nombres"
+                                autocomplete="given-name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- APELLIDOS -->
+
+                    <div class="auth-field">
+
+                        <label for="apellidos">
+                            Apellidos
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                A
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="apellidos"
+                                name="apellidos"
+                                placeholder="Tus apellidos"
+                                autocomplete="family-name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     CONTACTO
+                ============================================== -->
+
+                <div class="auth-form-section-title">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Datos de contacto
+                        </strong>
+
+                        <small>
+                            Información para tu cuenta
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="auth-two-columns">
+
+
+                    <!-- CORREO -->
+
+                    <div class="auth-field">
+
+                        <label for="correo">
+                            Correo electrónico
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                @
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="correo"
+                                name="correo"
+                                placeholder="correo@ejemplo.com"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TELEFONO -->
+
+                    <div class="auth-field">
+
+                        <label for="telefono">
+
+                            Teléfono
+
+                            <span class="auth-optional">
+                                opcional
+                            </span>
+
+                        </label>
+
+
+                        <div class="auth-input-wrapper">
+
+                            <span class="auth-input-icon">
+                                ☎
+                            </span>
+
+
+                            <input
+                                type="tel"
+                                id="telefono"
+                                name="telefono"
+                                placeholder="Número de teléfono"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =============================================
+                     SEGURIDAD
+                ============================================== -->
+
+                <div class="auth-form-section-title">
+
+                    <span>
+                        04
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Seguridad
+                        </strong>
+
+                        <small>
+                            Protege el acceso a tu cuenta
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="auth-field">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ●
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Mínimo 8 caracteres"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-password-hint">
+
+                        <span></span>
+
+                        <small>
+                            Utiliza una contraseña de mínimo 8 caracteres.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONFIRMAR PASSWORD -->
+
+                <div class="auth-field">
+
+                    <label for="confirmar_password">
+                        Confirmar contraseña
+                    </label>
+
+
+                    <div class="auth-input-wrapper">
+
+                        <span class="auth-input-icon">
+                            ●
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="confirmar_password"
+                            name="confirmar_password"
+                            placeholder="Repite tu contraseña"
+                            minlength="8"
+                            autocomplete="new-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+
+                    <span>
+                        Crear cuenta
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-switch">
+
+                <span>
+                    ¿Ya tienes una cuenta?
+                </span>
+
+
+                <a href="{{ url_for('auth.login') }}">
+                    Inicia sesión
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+
+            <div class="auth-security">
+
+                <span class="auth-security-icon">
+                    ✓
+                </span>
+
+                <div>
+
+                    <strong>
+                        Tus datos importan
+                    </strong>
+
+                    <p>
+                        Completa únicamente la información solicitada
+                        para crear tu cuenta EcoRecicla.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</div>
+
+{% endblock %}

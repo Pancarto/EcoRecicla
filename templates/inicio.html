@@ -1,0 +1,1068 @@
+{% extends "layout.html" %}
+
+{% block title %}EcoRecicla | Recicla, suma y transforma{% endblock %}
+
+{% block content %}
+
+<div class="home-page">
+
+    <!-- =========================================================
+         HERO PRINCIPAL
+    ========================================================== -->
+
+    <section class="home-hero">
+
+        <div class="home-hero-content">
+
+            <div class="home-eyebrow">
+                <span class="home-eyebrow-dot"></span>
+                Universidad de San Mateo · Bogotá
+            </div>
+
+            <h2>
+                Recicla hoy.
+                <span>Genera impacto.</span>
+                Recibe recompensas.
+            </h2>
+
+            <p class="home-hero-description">
+                EcoRecicla convierte tus materiales reciclables en una
+                experiencia medible y recompensada. Registra tus entregas,
+                acumula puntos y descubre nuevas formas de contribuir
+                con el cuidado del planeta.
+            </p>
+
+            <div class="home-hero-actions">
+
+                <a href="{{ url_for('auth.login') }}"
+                   class="boton home-primary-button">
+                    Iniciar sesión
+                    <span>→</span>
+                </a>
+
+                <a href="{{ url_for('auth.registro') }}"
+                   class="boton boton-secundario home-secondary-button">
+                    Crear mi cuenta
+                </a>
+
+            </div>
+
+            <div class="home-hero-trust">
+
+                <div class="home-avatar-stack">
+                    <span>♻</span>
+                    <span>🌱</span>
+                    <span>✓</span>
+                </div>
+
+                <div>
+                    <strong>Reciclaje con propósito</strong>
+                    <small>
+                        Una plataforma pensada para la comunidad universitaria
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PANEL VISUAL DEL HERO -->
+
+        <div class="home-hero-visual">
+
+            <div class="hero-orbit hero-orbit-one"></div>
+            <div class="hero-orbit hero-orbit-two"></div>
+
+            <div class="hero-floating-card hero-floating-top">
+
+                <span class="floating-icon">♻</span>
+
+                <div>
+                    <strong>Reciclar</strong>
+                    <small>se convierte en hábito</small>
+                </div>
+
+            </div>
+
+
+            <div class="hero-main-card">
+
+                <div class="hero-card-header">
+
+                    <div>
+                        <small>IMPACTO PERSONAL</small>
+                        <strong>Tu aporte cuenta</strong>
+                    </div>
+
+                    <span class="hero-card-icon">🌱</span>
+
+                </div>
+
+
+                <div class="hero-plant">
+
+                    <div class="hero-plant-glow"></div>
+
+                    <div class="hero-leaf leaf-one"></div>
+                    <div class="hero-leaf leaf-two"></div>
+                    <div class="hero-leaf leaf-three"></div>
+
+                    <div class="hero-plant-stem"></div>
+
+                </div>
+
+
+                <div class="hero-card-footer">
+
+                    <div>
+                        <small>ACTITUD</small>
+                        <strong>Sostenible</strong>
+                    </div>
+
+                    <div>
+                        <small>ACCIÓN</small>
+                        <strong>Reciclar</strong>
+                    </div>
+
+                    <div>
+                        <small>RECOMPENSA</small>
+                        <strong>♻ + 🎁</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-floating-card hero-floating-bottom">
+
+                <span class="floating-check">✓</span>
+
+                <div>
+                    <strong>+ Puntos</strong>
+                    <small>por cada entrega válida</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         BARRA DE ESTADÍSTICAS VISUALES
+    ========================================================== -->
+
+    <section class="home-stats-section">
+
+        <div class="home-stat">
+
+            <div class="home-stat-icon green">
+                ♻
+            </div>
+
+            <div>
+                <strong>Reciclaje</strong>
+                <span>Una acción que genera valor</span>
+            </div>
+
+        </div>
+
+
+        <div class="home-stat">
+
+            <div class="home-stat-icon blue">
+                ✦
+            </div>
+
+            <div>
+                <strong>Puntos</strong>
+                <span>Acumula por tus entregas</span>
+            </div>
+
+        </div>
+
+
+        <div class="home-stat">
+
+            <div class="home-stat-icon green">
+                🎁
+            </div>
+
+            <div>
+                <strong>Recompensas</strong>
+                <span>Canjea tus puntos</span>
+            </div>
+
+        </div>
+
+
+        <div class="home-stat">
+
+            <div class="home-stat-icon blue">
+                ✓
+            </div>
+
+            <div>
+                <strong>Trazabilidad</strong>
+                <span>Consulta tu historial</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         INTRODUCCIÓN
+    ========================================================== -->
+
+    <section class="home-intro">
+
+        <div class="home-section-label">
+            <span>01</span>
+            SOBRE ECORECICLA
+        </div>
+
+        <div class="home-intro-grid">
+
+            <div class="home-intro-title">
+
+                <h2>
+                    Reciclar no tiene que
+                    ser complicado.
+                </h2>
+
+                <div class="home-title-line"></div>
+
+            </div>
+
+
+            <div class="home-intro-text">
+
+                <p>
+                    EcoRecicla nace como una propuesta para integrar el
+                    reciclaje, la tecnología y las recompensas dentro
+                    de la comunidad universitaria.
+                </p>
+
+                <p>
+                    La plataforma permite registrar las entregas de
+                    material reciclable, generar códigos únicos,
+                    acumular puntos y consultar la actividad realizada
+                    desde una misma cuenta.
+                </p>
+
+                <a href="{{ url_for('auth.login') }}"
+                   class="home-text-link">
+                    Explorar mi cuenta
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CÓMO FUNCIONA
+    ========================================================== -->
+
+    <section class="home-process-section">
+
+        <div class="home-section-heading">
+
+            <div>
+                <div class="home-section-label">
+                    <span>02</span>
+                    EL PROCESO
+                </div>
+
+                <h2>
+                    De una botella a una recompensa.
+                </h2>
+            </div>
+
+            <p>
+                El proceso está pensado para que reciclar sea sencillo,
+                claro y fácil de seguir.
+            </p>
+
+        </div>
+
+
+        <div class="home-process-grid">
+
+            <article class="home-process-card">
+
+                <div class="process-number">01</div>
+
+                <div class="process-icon">👤</div>
+
+                <h3>Crea tu cuenta</h3>
+
+                <p>
+                    Regístrate en EcoRecicla y obtén acceso a todas
+                    las herramientas de la plataforma.
+                </p>
+
+                <span class="process-arrow">01</span>
+
+            </article>
+
+
+            <article class="home-process-card featured">
+
+                <div class="process-number">02</div>
+
+                <div class="process-icon">♻</div>
+
+                <h3>Entrega tu material</h3>
+
+                <p>
+                    Lleva tu material reciclable al punto o máquina
+                    habilitada para su recepción.
+                </p>
+
+                <span class="process-arrow">02</span>
+
+            </article>
+
+
+            <article class="home-process-card">
+
+                <div class="process-number">03</div>
+
+                <div class="process-icon">🎫</div>
+
+                <h3>Obtén tu registro</h3>
+
+                <p>
+                    Tu entrega queda asociada a un código que permite
+                    identificar y consultar la operación.
+                </p>
+
+                <span class="process-arrow">03</span>
+
+            </article>
+
+
+            <article class="home-process-card">
+
+                <div class="process-number">04</div>
+
+                <div class="process-icon">🎁</div>
+
+                <h3>Canjea tus puntos</h3>
+
+                <p>
+                    Cuando tengas suficientes puntos podrás consultar
+                    las recompensas disponibles y realizar tus canjes.
+                </p>
+
+                <span class="process-arrow">04</span>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         MATERIALES
+    ========================================================== -->
+
+    <section class="home-material-section">
+
+        <div class="home-material-copy">
+
+            <div class="home-section-label">
+                <span>03</span>
+                GUÍA DE RECICLAJE
+            </div>
+
+            <h2>
+                Conoce mejor
+                lo que reciclas.
+            </h2>
+
+            <p>
+                Separar correctamente los residuos es uno de los
+                primeros pasos para facilitar su aprovechamiento.
+                Antes de entregar un material, procura que esté
+                limpio, seco y separado.
+            </p>
+
+            <a href="{{ url_for('auth.login') }}"
+               class="boton home-outline-button">
+                Ver información en mi cuenta
+                <span>→</span>
+            </a>
+
+        </div>
+
+
+        <div class="home-material-grid">
+
+            <div class="material-modern-card material-green">
+
+                <div class="material-card-top">
+                    <span class="material-big-icon">🥤</span>
+                    <span class="material-number">01</span>
+                </div>
+
+                <h3>Plástico</h3>
+
+                <p>
+                    Botellas y envases aprovechables,
+                    preferiblemente vacíos y limpios.
+                </p>
+
+                <div class="material-tag">
+                    RECICLABLE
+                </div>
+
+            </div>
+
+
+            <div class="material-modern-card material-blue">
+
+                <div class="material-card-top">
+                    <span class="material-big-icon">📄</span>
+                    <span class="material-number">02</span>
+                </div>
+
+                <h3>Papel</h3>
+
+                <p>
+                    Hojas, periódicos y otros productos de papel
+                    sin contaminación.
+                </p>
+
+                <div class="material-tag">
+                    RECICLABLE
+                </div>
+
+            </div>
+
+
+            <div class="material-modern-card material-green">
+
+                <div class="material-card-top">
+                    <span class="material-big-icon">📦</span>
+                    <span class="material-number">03</span>
+                </div>
+
+                <h3>Cartón</h3>
+
+                <p>
+                    Cajas y empaques de cartón limpios,
+                    preferiblemente plegados.
+                </p>
+
+                <div class="material-tag">
+                    RECICLABLE
+                </div>
+
+            </div>
+
+
+            <div class="material-modern-card material-blue">
+
+                <div class="material-card-top">
+                    <span class="material-big-icon">🥫</span>
+                    <span class="material-number">04</span>
+                </div>
+
+                <h3>Metal</h3>
+
+                <p>
+                    Latas y otros elementos metálicos que puedan
+                    entrar en procesos de aprovechamiento.
+                </p>
+
+                <div class="material-tag">
+                    RECICLABLE
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         QUÉ SÍ / QUÉ NO
+    ========================================================== -->
+
+    <section class="home-separation-section">
+
+        <div class="home-section-heading">
+
+            <div>
+
+                <div class="home-section-label">
+                    <span>04</span>
+                    SEPARACIÓN
+                </div>
+
+                <h2>
+                    Reciclar bien también
+                    es saber separar.
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-separation-grid">
+
+            <div class="separation-card yes">
+
+                <div class="separation-header">
+
+                    <div class="separation-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <small>BUENA PRÁCTICA</small>
+                        <h3>Sí recibimos</h3>
+                    </div>
+
+                </div>
+
+
+                <ul>
+
+                    <li>
+                        <span>✓</span>
+                        Botellas plásticas vacías
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Latas de aluminio
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Papel limpio
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Cartón sin residuos
+                    </li>
+
+                    <li>
+                        <span>✓</span>
+                        Envases aprovechables
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="separation-card no">
+
+                <div class="separation-header">
+
+                    <div class="separation-icon">
+                        !
+                    </div>
+
+                    <div>
+                        <small>EVITA MEZCLAR</small>
+                        <h3>No recibimos</h3>
+                    </div>
+
+                </div>
+
+
+                <ul>
+
+                    <li>
+                        <span>×</span>
+                        Material con comida
+                    </li>
+
+                    <li>
+                        <span>×</span>
+                        Líquidos dentro de envases
+                    </li>
+
+                    <li>
+                        <span>×</span>
+                        Residuos peligrosos
+                    </li>
+
+                    <li>
+                        <span>×</span>
+                        Material contaminado
+                    </li>
+
+                    <li>
+                        <span>×</span>
+                        Residuos electrónicos
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         PANEL DE IMPACTO
+    ========================================================== -->
+
+    <section class="home-impact-section">
+
+        <div class="impact-background-circle circle-one"></div>
+        <div class="impact-background-circle circle-two"></div>
+
+        <div class="impact-copy">
+
+            <div class="home-section-label light">
+                <span>05</span>
+                IMPACTO
+            </div>
+
+            <h2>
+                Cada entrega puede
+                convertirse en algo más.
+            </h2>
+
+            <p>
+                Cuando el reciclaje se registra, deja de ser una acción
+                invisible. Puedes consultar tus movimientos, conocer
+                tus puntos y observar cómo tu constancia construye
+                nuevos hábitos.
+            </p>
+
+        </div>
+
+
+        <div class="impact-metrics">
+
+            <div class="impact-metric">
+
+                <span class="impact-metric-icon">♻</span>
+
+                <strong>01</strong>
+
+                <small>
+                    Entrega registrada
+                </small>
+
+            </div>
+
+
+            <div class="impact-metric">
+
+                <span class="impact-metric-icon">✦</span>
+
+                <strong>02</strong>
+
+                <small>
+                    Puntos acumulados
+                </small>
+
+            </div>
+
+
+            <div class="impact-metric">
+
+                <span class="impact-metric-icon">🎁</span>
+
+                <strong>03</strong>
+
+                <small>
+                    Recompensa disponible
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FUNCIONES DE LA CUENTA
+         TODOS LOS BOTONES SIGUEN AL LOGIN
+    ========================================================== -->
+
+    <section class="home-features-section">
+
+        <div class="home-section-heading">
+
+            <div>
+
+                <div class="home-section-label">
+                    <span>06</span>
+                    TU CUENTA
+                </div>
+
+                <h2>
+                    Mucho más que registrar
+                    un reciclaje.
+                </h2>
+
+            </div>
+
+            <p>
+                Estas herramientas forman parte de la experiencia
+                EcoRecicla y están disponibles al iniciar sesión.
+            </p>
+
+        </div>
+
+
+        <div class="home-feature-grid">
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    01
+                </div>
+
+                <div class="feature-card-icon">
+                    ♻
+                </div>
+
+                <h3>Registrar reciclaje</h3>
+
+                <p>
+                    Registra el material entregado y consulta
+                    la información correspondiente a tu operación.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    02
+                </div>
+
+                <div class="feature-card-icon blue">
+                    📊
+                </div>
+
+                <h3>Consultar historial</h3>
+
+                <p>
+                    Revisa tus entregas, códigos y movimientos
+                    registrados dentro del sistema.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    03
+                </div>
+
+                <div class="feature-card-icon">
+                    🎁
+                </div>
+
+                <h3>Ver recompensas</h3>
+
+                <p>
+                    Descubre los beneficios disponibles para
+                    utilizar tus puntos acumulados.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    04
+                </div>
+
+                <div class="feature-card-icon blue">
+                    🔄
+                </div>
+
+                <h3>Realizar canjes</h3>
+
+                <p>
+                    Utiliza tus puntos disponibles para obtener
+                    una recompensa de tu elección.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    05
+                </div>
+
+                <div class="feature-card-icon">
+                    ⭐
+                </div>
+
+                <h3>Seguir tus logros</h3>
+
+                <p>
+                    Consulta la evolución de tu actividad y
+                    mantén la motivación para continuar reciclando.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+
+            <a href="{{ url_for('auth.login') }}"
+               class="home-feature-card">
+
+                <div class="feature-card-number">
+                    06
+                </div>
+
+                <div class="feature-card-icon blue">
+                    👤
+                </div>
+
+                <h3>Gestionar tu perfil</h3>
+
+                <p>
+                    Mantén actualizada la información de tu cuenta
+                    desde un mismo espacio.
+                </p>
+
+                <span class="feature-card-link">
+                    Entrar a mi cuenta →
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FILOSOFÍA
+    ========================================================== -->
+
+    <section class="home-philosophy-section">
+
+        <div class="philosophy-visual">
+
+            <div class="philosophy-ring ring-one"></div>
+            <div class="philosophy-ring ring-two"></div>
+
+            <div class="philosophy-center">
+                <span>♻</span>
+                <strong>ECO</strong>
+                <small>RECICLA</small>
+            </div>
+
+            <span class="philosophy-orbit-icon icon-one">🌱</span>
+            <span class="philosophy-orbit-icon icon-two">🎁</span>
+            <span class="philosophy-orbit-icon icon-three">♻</span>
+
+        </div>
+
+
+        <div class="philosophy-copy">
+
+            <div class="home-section-label">
+                <span>07</span>
+                NUESTRA VISIÓN
+            </div>
+
+            <h2>
+                Tecnología para
+                construir mejores hábitos.
+            </h2>
+
+            <p>
+                La propuesta de EcoRecicla busca conectar una acción
+                cotidiana con información, seguimiento y motivación.
+            </p>
+
+            <p>
+                El objetivo no es únicamente reciclar más, sino hacer
+                que cada persona pueda entender el proceso, visualizar
+                su participación y encontrar una razón adicional para
+                continuar.
+            </p>
+
+
+            <div class="philosophy-points">
+
+                <div>
+                    <span>01</span>
+                    <strong>Medir</strong>
+                    <small>
+                        Registrar las acciones realizadas.
+                    </small>
+                </div>
+
+                <div>
+                    <span>02</span>
+                    <strong>Motivar</strong>
+                    <small>
+                        Convertir la constancia en recompensas.
+                    </small>
+                </div>
+
+                <div>
+                    <span>03</span>
+                    <strong>Transformar</strong>
+                    <small>
+                        Crear hábitos sostenibles.
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         UBICACIÓN
+    ========================================================== -->
+
+    <section class="home-location-section">
+
+        <div class="location-icon-large">
+            <span>⌖</span>
+        </div>
+
+        <div class="location-copy">
+
+            <div class="home-section-label">
+                <span>08</span>
+                UBICACIÓN
+            </div>
+
+            <h2>
+                Nuestra experiencia comienza
+                en la Universidad de San Mateo.
+            </h2>
+
+            <p>
+                EcoRecicla opera actualmente como un proyecto piloto
+                dentro de la Universidad de San Mateo, en Bogotá.
+                Desde este punto buscamos impulsar una cultura de
+                aprovechamiento y participación.
+            </p>
+
+        </div>
+
+
+        <div class="location-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+                <strong>Proyecto piloto</strong>
+                <small>Universidad de San Mateo</small>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CTA FINAL
+    ========================================================== -->
+
+    <section class="home-final-cta">
+
+        <div class="final-cta-decoration decoration-one"></div>
+        <div class="final-cta-decoration decoration-two"></div>
+
+        <div class="final-cta-content">
+
+            <div class="home-section-label light center">
+                <span>09</span>
+                COMIENZA AHORA
+            </div>
+
+            <h2>
+                Tu próximo reciclaje
+                puede ser el primero.
+            </h2>
+
+            <p>
+                Regístrate, conoce la plataforma y empieza a convertir
+                tus acciones de reciclaje en puntos y oportunidades.
+            </p>
+
+
+            <div class="home-hero-actions center">
+
+                <a href="{{ url_for('auth.login') }}"
+                   class="boton home-final-button">
+                    Iniciar sesión
+                    <span>→</span>
+                </a>
+
+                <a href="{{ url_for('auth.registro') }}"
+                   class="boton home-final-button-outline">
+                    Crear cuenta gratis
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

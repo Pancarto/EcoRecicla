@@ -1,0 +1,470 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Panel Empresa | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="control-page company-control-page">
+
+
+    <!-- =====================================================
+         HERO EMPRESA
+    ====================================================== -->
+
+    <section class="company-hero">
+
+
+        <div class="company-hero-content">
+
+            <div class="company-kicker">
+
+                <span class="company-live-dot"></span>
+
+                EMPRESA ALIADA · ECORECICLA
+
+            </div>
+
+
+            <h1>
+                Panel de
+                empresa aliada
+            </h1>
+
+
+            <p>
+                Administra la validación de recompensas y
+                consulta el historial de entregas realizadas
+                desde un mismo espacio.
+            </p>
+
+
+            <div class="company-hero-tags">
+
+                <span>
+                    🎫 TICKETS
+                </span>
+
+                <span>
+                    🎁 RECOMPENSAS
+                </span>
+
+                <span>
+                    📋 ENTREGAS
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="company-hero-visual">
+
+            <div class="company-orbit orbit-one"></div>
+            <div class="company-orbit orbit-two"></div>
+
+            <div class="company-building">
+                🏢
+            </div>
+
+            <span class="company-leaf leaf-one">
+                ♻
+            </span>
+
+            <span class="company-leaf leaf-two">
+                +
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ESTADO VISUAL
+    ====================================================== -->
+
+    <section class="company-status-bar">
+
+
+        <div class="company-status-main">
+
+            <span class="company-status-icon">
+                ✓
+            </span>
+
+            <div>
+
+                <strong>
+                    Centro de operaciones
+                </strong>
+
+                <small>
+                    Herramientas disponibles para la gestión
+                    de beneficios EcoRecicla.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div class="company-status-badge">
+            ACTIVO
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         OPERACIONES
+    ====================================================== -->
+
+    <section class="control-section company-operations">
+
+        <div class="control-section-heading">
+
+            <div>
+
+                <span class="control-mini-label">
+                    HERRAMIENTAS
+                </span>
+
+                <h2>
+                    Gestión de recompensas
+                </h2>
+
+            </div>
+
+            <p>
+                Utiliza las herramientas disponibles para
+                comprobar y registrar las entregas.
+            </p>
+
+        </div>
+
+
+
+        <div class="company-actions">
+
+
+            <!-- VALIDAR -->
+
+            <a
+                href="{{ url_for('validacion.validar') }}"
+                class="company-operation company-operation-primary"
+            >
+
+                <div class="company-operation-icon">
+                    🎫
+                </div>
+
+
+                <div class="company-operation-content">
+
+                    <span class="operation-label">
+                        OPERACIÓN PRINCIPAL
+                    </span>
+
+                    <h3>
+                        Validar ticket
+                    </h3>
+
+                    <p>
+                        Verifica el código de un ticket presentado
+                        por un usuario antes de realizar la entrega
+                        de la recompensa correspondiente.
+                    </p>
+
+                </div>
+
+
+                <div class="company-operation-arrow">
+                    →
+                </div>
+
+            </a>
+
+
+
+            <!-- HISTORIAL -->
+
+            <a
+                href="{{ url_for('validacion.historial') }}"
+                class="company-operation company-operation-secondary"
+            >
+
+                <div class="company-operation-icon">
+                    📋
+                </div>
+
+
+                <div class="company-operation-content">
+
+                    <span class="operation-label">
+                        CONSULTA
+                    </span>
+
+                    <h3>
+                        Historial de entregas
+                    </h3>
+
+                    <p>
+                        Revisa las entregas registradas y
+                        consulta el historial disponible
+                        de las operaciones realizadas.
+                    </p>
+
+                </div>
+
+
+                <div class="company-operation-arrow">
+                    →
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ESTADÍSTICAS VISUALES
+         INFORMACIÓN ESTÁTICA / DE CONTEXTO
+    ====================================================== -->
+
+    <section class="company-context-grid">
+
+
+        <article class="company-context-card">
+
+            <div class="context-card-icon">
+                🔎
+            </div>
+
+            <span>
+                CONTROL
+            </span>
+
+            <h3>
+                Validación
+            </h3>
+
+            <p>
+                Comprueba que cada ticket corresponda
+                a una operación válida antes de entregar
+                un beneficio.
+            </p>
+
+        </article>
+
+
+        <article class="company-context-card">
+
+            <div class="context-card-icon blue">
+                🎁
+            </div>
+
+            <span>
+                BENEFICIO
+            </span>
+
+            <h3>
+                Recompensas
+            </h3>
+
+            <p>
+                Facilita una experiencia ordenada para
+                los usuarios que llegan a reclamar
+                sus beneficios.
+            </p>
+
+        </article>
+
+
+        <article class="company-context-card">
+
+            <div class="context-card-icon dark">
+                📋
+            </div>
+
+            <span>
+                TRAZABILIDAD
+            </span>
+
+            <h3>
+                Entregas
+            </h3>
+
+            <p>
+                El historial permite conservar una visión
+                organizada de las operaciones realizadas.
+            </p>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FLUJO EMPRESA
+    ====================================================== -->
+
+    <section class="company-process">
+
+        <div class="company-process-heading">
+
+            <span class="control-mini-label">
+                PROCESO
+            </span>
+
+            <h2>
+                Una entrega en cuatro pasos
+            </h2>
+
+            <p>
+                El flujo visual representa la operación
+                que realiza una empresa aliada.
+            </p>
+
+        </div>
+
+
+        <div class="company-process-track">
+
+
+            <div class="process-item">
+
+                <div class="process-circle">
+                    01
+                </div>
+
+                <strong>
+                    Recibir
+                </strong>
+
+                <small>
+                    El usuario presenta
+                    su ticket.
+                </small>
+
+            </div>
+
+
+            <span class="process-connector">
+                →
+            </span>
+
+
+            <div class="process-item">
+
+                <div class="process-circle">
+                    02
+                </div>
+
+                <strong>
+                    Verificar
+                </strong>
+
+                <small>
+                    Se comprueba
+                    el código.
+                </small>
+
+            </div>
+
+
+            <span class="process-connector">
+                →
+            </span>
+
+
+            <div class="process-item">
+
+                <div class="process-circle">
+                    03
+                </div>
+
+                <strong>
+                    Entregar
+                </strong>
+
+                <small>
+                    Se proporciona
+                    el beneficio.
+                </small>
+
+            </div>
+
+
+            <span class="process-connector">
+                →
+            </span>
+
+
+            <div class="process-item">
+
+                <div class="process-circle">
+                    04
+                </div>
+
+                <strong>
+                    Registrar
+                </strong>
+
+                <small>
+                    La operación
+                    queda registrada.
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MENSAJE FINAL
+    ====================================================== -->
+
+    <section class="company-impact">
+
+        <div class="impact-mark">
+            ♻
+        </div>
+
+
+        <div>
+
+            <span class="control-mini-label">
+                COMPROMISO
+            </span>
+
+            <h2>
+                Reciclar conecta personas,
+                empresas e impacto.
+            </h2>
+
+            <p>
+                La participación de las empresas aliadas
+                permite transformar los puntos acumulados
+                por los usuarios en beneficios reales.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,623 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Panel administrativo | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="control-page admin-control-page">
+
+
+    <!-- =====================================================
+         ENCABEZADO PRINCIPAL
+    ====================================================== -->
+
+    <section class="control-hero">
+
+        <div class="control-hero-copy">
+
+            <div class="control-kicker">
+                <span class="control-status-dot"></span>
+                CENTRO DE CONTROL · ECORECICLA
+            </div>
+
+            <h1>
+                Panel
+                administrativo
+            </h1>
+
+            <p>
+                Gestiona y supervisa las operaciones principales
+                relacionadas con recompensas, validaciones y
+                entregas dentro de EcoRecicla.
+            </p>
+
+        </div>
+
+
+        <div class="control-hero-symbol">
+
+            <div class="control-symbol-ring ring-one"></div>
+            <div class="control-symbol-ring ring-two"></div>
+
+            <span>
+                ⚙
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+        <!-- =====================================================
+        RESUMEN REAL DEL SISTEMA
+    ====================================================== -->
+
+    <section class="control-overview">
+
+
+        <!-- USUARIOS -->
+
+        <div class="overview-card">
+
+            <div class="overview-icon overview-green">
+                👥
+            </div>
+
+            <div>
+
+                <span class="overview-label">
+                    USUARIOS ACTIVOS
+                </span>
+
+                <strong>
+                    {{ estadisticas.usuarios }}
+                </strong>
+
+                <small>
+                    Usuarios registrados
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- RECICLAJES -->
+
+        <div class="overview-card">
+
+            <div class="overview-icon overview-blue">
+                ♻
+            </div>
+
+            <div>
+
+                <span class="overview-label">
+                    RECICLAJES
+                </span>
+
+                <strong>
+                    {{ estadisticas.reciclajes }}
+                </strong>
+
+                <small>
+                    Actividades registradas
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- CANJES -->
+
+        <div class="overview-card">
+
+            <div class="overview-icon overview-dark">
+                🎁
+            </div>
+
+            <div>
+
+                <span class="overview-label">
+                    CANJES
+                </span>
+
+                <strong>
+                    {{ estadisticas.canjes }}
+                </strong>
+
+                <small>
+                    Recompensas canjeadas
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- PUNTOS -->
+
+        <div class="overview-card">
+
+            <div class="overview-icon overview-soft">
+                ⭐
+            </div>
+
+            <div>
+
+                <span class="overview-label">
+                    PUNTOS GENERADOS
+                </span>
+
+                <strong>
+                    {{ estadisticas.puntos_generados }}
+                </strong>
+
+                <small>
+                    Puntos obtenidos
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ÁREA DE GESTIÓN
+    ====================================================== -->
+
+    <section class="control-section">
+
+        <div class="control-section-heading">
+
+            <div>
+
+                <span class="control-mini-label">
+                    OPERACIONES
+                </span>
+
+                <h2>
+                    Gestión del sistema
+                </h2>
+
+            </div>
+
+            <p>
+                Accede a las herramientas disponibles
+                para las operaciones administrativas.
+            </p>
+
+        </div>
+
+
+
+        <div class="control-actions-grid">
+
+
+
+            <!-- RECOMPENSAS -->
+
+            <a
+            href="{{ url_for('admin.recompensas') }}"
+            class="control-action-card action-green"
+              >
+
+                <div class="action-card-top">
+
+                    <div class="control-action-icon">
+                        🎁
+                    </div>
+
+                    <span class="action-number">
+                        01
+                    </span>
+
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Gestión de recompensas
+                    </h3>
+
+                    <p>
+                        Área destinada a la administración
+                        del catálogo de recompensas, empresas
+                        aliadas y beneficios disponibles.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-bottom">
+
+                    <span>
+                        CATÁLOGO
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+             <!-- USUARIOS -->
+
+
+            <a
+                href="{{ url_for('admin.usuarios') }}"
+                class="control-action-card action-dark"
+            >
+
+                <div class="action-card-top">
+
+                    <div class="control-action-icon">
+                        👥
+                    </div>
+
+                    <span class="action-number">
+                        02
+                    </span>
+
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Gestión de usuarios
+                    </h3>
+
+                    <p>
+                        Consulta los usuarios registrados,
+                        sus roles, estados y actividad
+                        dentro de EcoRecicla.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-bottom">
+
+                    <span>
+                        VER USUARIOS
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- VALIDAR -->
+
+            <a
+                href="{{ url_for('validacion.validar') }}"
+                class="control-action-card action-blue"
+            >
+
+                <div class="action-card-top">
+
+                    <div class="control-action-icon">
+                        🎫
+                    </div>
+
+                    <span class="action-number">
+                        02
+                    </span>
+
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Validación de tickets
+                    </h3>
+
+                    <p>
+                        Verifica los códigos presentados
+                        por los usuarios y gestiona el proceso
+                        de entrega de recompensas.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-bottom">
+
+                    <span>
+                        ABRIR VALIDACIÓN
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- HISTORIAL -->
+
+            <a
+                href="{{ url_for('validacion.historial') }}"
+                class="control-action-card action-dark"
+            >
+
+                <div class="action-card-top">
+
+                    <div class="control-action-icon">
+                        📋
+                    </div>
+
+                    <span class="action-number">
+                        03
+                    </span>
+
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Historial de entregas
+                    </h3>
+
+                    <p>
+                        Consulta el registro de las entregas
+                        realizadas mediante el sistema
+                        de validación.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-bottom">
+
+                    <span>
+                        VER HISTORIAL
+                    </span>
+
+                    <span class="action-arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BLOQUE INFORMATIVO
+    ====================================================== -->
+
+    <section class="control-information">
+
+
+        <div class="information-main">
+
+            <div class="information-icon">
+                ♻
+            </div>
+
+            <div>
+
+                <span class="control-mini-label">
+                    ENFOQUE ECO
+                </span>
+
+                <h2>
+                    Una administración organizada
+                    también genera impacto.
+                </h2>
+
+                <p>
+                    Mantener controladas las validaciones,
+                    recompensas y entregas permite que el
+                    sistema conserve un flujo claro y
+                    verificable para sus usuarios.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="information-points">
+
+            <div>
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Validaciones claras
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Registro organizado
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    ✓
+                </span>
+
+                <p>
+                    Gestión responsable
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FLUJO VISUAL
+    ====================================================== -->
+
+    <section class="control-flow-section">
+
+        <div class="control-section-heading">
+
+            <div>
+
+                <span class="control-mini-label">
+                    FLUJO OPERATIVO
+                </span>
+
+                <h2>
+                    Así se conecta la operación
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="control-flow">
+
+
+            <div class="flow-step">
+
+                <span class="flow-index">
+                    01
+                </span>
+
+                <div class="flow-icon">
+                    🎫
+                </div>
+
+                <strong>
+                    Ticket
+                </strong>
+
+                <small>
+                    El usuario presenta
+                    su código.
+                </small>
+
+            </div>
+
+
+            <div class="flow-line"></div>
+
+
+            <div class="flow-step">
+
+                <span class="flow-index">
+                    02
+                </span>
+
+                <div class="flow-icon">
+                    🔎
+                </div>
+
+                <strong>
+                    Validación
+                </strong>
+
+                <small>
+                    Se comprueba
+                    la información.
+                </small>
+
+            </div>
+
+
+            <div class="flow-line"></div>
+
+
+            <div class="flow-step">
+
+                <span class="flow-index">
+                    03
+                </span>
+
+                <div class="flow-icon">
+                    🎁
+                </div>
+
+                <strong>
+                    Entrega
+                </strong>
+
+                <small>
+                    Se gestiona
+                    la recompensa.
+                </small>
+
+            </div>
+
+
+            <div class="flow-line"></div>
+
+
+            <div class="flow-step">
+
+                <span class="flow-index">
+                    04
+                </span>
+
+                <div class="flow-icon">
+                    📋
+                </div>
+
+                <strong>
+                    Registro
+                </strong>
+
+                <small>
+                    La operación queda
+                    documentada.
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+{% endblock %}

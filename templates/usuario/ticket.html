@@ -1,0 +1,505 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Ticket de canje | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="ticket-page">
+
+    <!-- =====================================================
+         CABECERA DE CONFIRMACIÓN
+    ====================================================== -->
+
+    <section class="ticket-success-header">
+
+        <div class="ticket-success-icon">
+            <span>✓</span>
+        </div>
+
+        <div class="ticket-success-copy">
+
+            <span class="ticket-eyebrow">
+                CANJE COMPLETADO
+            </span>
+
+            <h1>
+                ¡Recompensa
+                <span>generada!</span>
+            </h1>
+
+            <p>
+                Tu canje se realizó correctamente.
+                Conserva este comprobante y presenta el código
+                en el establecimiento autorizado para reclamar
+                tu recompensa.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTENEDOR PRINCIPAL DEL TICKET
+    ====================================================== -->
+
+    <section class="ticket-wrapper">
+
+        <div class="ticket-card">
+
+
+            <!-- =================================================
+                 ENCABEZADO
+            ================================================== -->
+
+            <div class="ticket-card-header">
+
+                <div class="ticket-brand">
+
+                    <div class="ticket-brand-icon">
+                        ♻
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            EcoRecicla
+                        </strong>
+
+                        <span>
+                            Sistema de reciclaje y recompensas
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-status">
+
+                    <span class="ticket-status-dot"></span>
+
+                    <span>
+                        GENERADO
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DIVISOR SUPERIOR
+            ================================================== -->
+
+            <div class="ticket-divider">
+                <span></span>
+                <i></i>
+                <span></span>
+            </div>
+
+
+            <!-- =================================================
+                 RECOMPENSA
+            ================================================== -->
+
+            <div class="ticket-reward-section">
+
+                <span class="ticket-label">
+                    RECOMPENSA CANJEADA
+                </span>
+
+                <div class="ticket-reward-icon">
+                    🎁
+                </div>
+
+                <h2>
+                    {{ canje.recompensa }}
+                </h2>
+
+                <p>
+                    Presenta este ticket para reclamar
+                    tu beneficio.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 INFORMACIÓN DEL CANJE
+            ================================================== -->
+
+            <div class="ticket-details">
+
+                <div class="ticket-detail">
+
+                    <span>
+                        PUNTOS UTILIZADOS
+                    </span>
+
+                    <strong>
+                        {{ canje.puntos_utilizados }}
+                        <small>PTS</small>
+                    </strong>
+
+                </div>
+
+
+                <div class="ticket-detail">
+
+                    <span>
+                        ESTADO
+                    </span>
+
+                    <strong class="ticket-detail-status">
+                        ✓ GENERADO
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CÓDIGO DEL TICKET
+            ================================================== -->
+
+            <div class="ticket-code-section">
+
+                <span class="ticket-label">
+                    CÓDIGO DE RECLAMACIÓN
+                </span>
+
+                <div class="ticket-code-box">
+
+                    <span class="ticket-code-prefix">
+                        #
+                    </span>
+
+                    <strong>
+                        {{ canje.codigo_ticket }}
+                    </strong>
+
+                </div>
+
+                <p>
+                    Presenta este código al establecimiento
+                    autorizado para reclamar tu recompensa.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 SEPARADOR TIPO TICKET
+            ================================================== -->
+
+            <div class="ticket-perforation">
+
+                <span class="ticket-notch left"></span>
+
+                <div class="ticket-perforation-line">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <span class="ticket-notch right"></span>
+
+            </div>
+
+
+            <!-- =================================================
+                 INFORMACIÓN FINAL
+            ================================================== -->
+
+            <div class="ticket-footer-info">
+
+                <div class="ticket-footer-icon">
+                    🌱
+                </div>
+
+                <div>
+
+                    <strong>
+                        Gracias por reciclar.
+                    </strong>
+
+                    <span>
+                        Cada acción contribuye a construir
+                        una comunidad más sostenible.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             PANEL LATERAL DE INSTRUCCIONES
+        ====================================================== -->
+
+        <aside class="ticket-side-panel">
+
+            <div class="ticket-side-top">
+
+                <span class="ticket-side-number">
+                    01
+                </span>
+
+                <span class="ticket-side-label">
+                    ¿QUÉ SIGUE?
+                </span>
+
+            </div>
+
+
+            <h3>
+                Reclama tu recompensa
+            </h3>
+
+            <p>
+                Tu código identifica el canje realizado.
+                Preséntalo en el establecimiento autorizado
+                para continuar con la entrega.
+            </p>
+
+
+            <div class="ticket-instructions">
+
+                <div class="ticket-instruction">
+
+                    <span>
+                        01
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Conserva tu código
+                        </strong>
+
+                        <small>
+                            Es el comprobante asociado
+                            a tu recompensa.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-instruction">
+
+                    <span>
+                        02
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Preséntalo
+                        </strong>
+
+                        <small>
+                            Muestra el código al establecimiento
+                            autorizado.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-instruction">
+
+                    <span>
+                        03
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Recibe tu beneficio
+                        </strong>
+
+                        <small>
+                            Continúa el proceso de entrega
+                            de tu recompensa.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="ticket-side-note">
+
+                <span>
+                    ♻
+                </span>
+
+                <p>
+                    Reciclar, acumular y transformar.
+                </p>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+
+    <!-- =====================================================
+         NAVEGACIÓN
+    ====================================================== -->
+
+    <section class="ticket-navigation">
+
+        <div class="ticket-navigation-heading">
+
+            <span>
+                ECORECICLA
+            </span>
+
+            <p>
+                ¿Qué quieres hacer ahora?
+            </p>
+
+        </div>
+
+
+        <div class="ticket-navigation-buttons">
+
+            <a
+                href="{{ url_for('main.dashboard') }}"
+                class="ticket-nav-button ticket-nav-main"
+            >
+
+                <span class="ticket-nav-icon">
+                    ⌂
+                </span>
+
+                <span>
+                    <strong>
+                        Volver al inicio
+                    </strong>
+
+                    <small>
+                        Ir a mi cuenta
+                    </small>
+                </span>
+
+                <b>
+                    →
+                </b>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('recompensa.catalogo') }}"
+                class="ticket-nav-button"
+            >
+
+                <span class="ticket-nav-icon">
+                    🎁
+                </span>
+
+                <span>
+                    <strong>
+                        Ver recompensas
+                    </strong>
+
+                    <small>
+                        Explorar el catálogo
+                    </small>
+                </span>
+
+                <b>
+                    →
+                </b>
+
+            </a>
+
+
+            <a
+                href="{{ url_for('canje.historial') }}"
+                class="ticket-nav-button"
+            >
+
+                <span class="ticket-nav-icon">
+                    🎟
+                </span>
+
+                <span>
+                    <strong>
+                        Mis canjes
+                    </strong>
+
+                    <small>
+                        Consultar historial
+                    </small>
+                </span>
+
+                <b>
+                    →
+                </b>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MENSAJE FINAL
+    ====================================================== -->
+
+    <section class="ticket-bottom-message">
+
+        <div class="ticket-bottom-line"></div>
+
+        <span>
+            ♻
+        </span>
+
+        <p>
+            Una recompensa es el resultado de una acción
+            que ayuda al planeta.
+        </p>
+
+        <div class="ticket-bottom-line"></div>
+
+    </section>
+
+</div>
+
+{% endblock %}

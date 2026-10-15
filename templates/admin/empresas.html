@@ -1,0 +1,191 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Empresas aliadas | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="admin-list-page admin-companies-page">
+
+    <section class="admin-list-hero company-admin-hero">
+
+        <div>
+
+            <span class="admin-list-kicker">
+                ADMINISTRACIÓN · ALIANZAS
+            </span>
+
+            <h1>
+                Empresas
+                <strong>aliadas.</strong>
+            </h1>
+
+            <p>
+                Consulta las organizaciones vinculadas al
+                ecosistema de recompensas de EcoRecicla.
+            </p>
+
+        </div>
+
+
+        <div class="admin-list-hero-icon">
+            🏢
+        </div>
+
+    </section>
+
+
+    <section class="admin-list-toolbar">
+
+        <div>
+
+            <span>
+                ECOSISTEMA
+            </span>
+
+            <h2>
+                Directorio de aliados
+            </h2>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('admin.panel') }}"
+            class="admin-toolbar-button"
+        >
+            ⌂ Principal
+        </a>
+
+    </section>
+
+
+    {% if empresas %}
+
+    <section class="companies-grid">
+
+        {% for empresa in empresas %}
+
+        <article class="company-admin-card">
+
+            <div class="company-admin-card-top">
+
+                <div class="company-admin-logo">
+                    🏢
+                </div>
+
+                <span class="company-admin-status">
+                    {{ empresa.estado }}
+                </span>
+
+            </div>
+
+
+            <div class="company-admin-content">
+
+                <span>
+                    EMPRESA ALIADA
+                </span>
+
+                <h2>
+                    {{ empresa.nombre }}
+                </h2>
+
+                <p>
+                    {{ empresa.descripcion or "Sin descripción" }}
+                </p>
+
+            </div>
+
+
+            <div class="company-admin-data">
+
+                <div>
+
+                    <span>
+                        NIT
+                    </span>
+
+                    <strong>
+                        {{ empresa.nit or "No registrado" }}
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        TELÉFONO
+                    </span>
+
+                    <strong>
+                        {{ empresa.telefono or "No registrado" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="company-admin-email">
+
+                    <span>
+                        CORREO
+                    </span>
+
+                    <strong>
+                        {{ empresa.correo or "No registrado" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="company-admin-card-footer">
+
+                <span>
+                    ♻ ALIANZA ECORECICLA
+                </span>
+
+                <span>
+                    ✓
+                </span>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+    {% else %}
+
+    <section class="admin-empty">
+
+        <div>
+            🏢
+        </div>
+
+        <span>
+            SIN EMPRESAS
+        </span>
+
+        <h2>
+            No existen empresas aliadas registradas.
+        </h2>
+
+        <p>
+            Las organizaciones vinculadas al sistema
+            aparecerán en este espacio.
+        </p>
+
+    </section>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1676 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Mi cuenta | EcoRecicla
+{% endblock %}
+
+
+{% block content %}
+
+<div class="user-dashboard">
+
+
+    <!-- =========================================================
+         HERO / SALUDO DEL USUARIO
+    ========================================================== -->
+
+    <section class="dashboard-hero">
+
+        <div class="dashboard-hero-content">
+
+            <div class="dashboard-eyebrow">
+                <span class="dashboard-live-dot"></span>
+                MI ESPACIO · ECORECICLA
+            </div>
+
+
+            <h1>
+                Hola,
+                <span>{{ session["nombre"] }}</span>.
+            </h1>
+
+
+            <p>
+                Este es tu centro de control. Aquí puedes
+                consultar tus puntos, revisar tu actividad,
+                registrar tus reciclajes y descubrir nuevas
+                recompensas.
+            </p>
+
+
+            <div class="dashboard-hero-actions">
+
+                <a
+                    href="{{ url_for('reciclaje.reciclar') }}"
+                    class="dashboard-main-button"
+                >
+                    <span class="button-icon">♻</span>
+
+                    <span>
+                        Registrar reciclaje
+                    </span>
+
+                    <strong>→</strong>
+                </a>
+
+
+                <a
+                    href="{{ url_for('recompensa.catalogo') }}"
+                    class="dashboard-light-button"
+                >
+                    Ver recompensas
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             TARJETA VISUAL DE PUNTOS
+        ====================================================== -->
+
+        <div class="dashboard-point-visual">
+
+            <div class="dashboard-orbit dashboard-orbit-one"></div>
+            <div class="dashboard-orbit dashboard-orbit-two"></div>
+
+
+            <div class="dashboard-point-card">
+
+                <div class="point-card-top">
+
+                    <span>
+                        ECO · BALANCE
+                    </span>
+
+                    <div class="point-card-leaf">
+                        ♻
+                    </div>
+
+                </div>
+
+
+                <div class="point-card-main">
+
+                    <small>
+                        PUNTOS DISPONIBLES
+                    </small>
+
+                    <strong>
+                        {{ saldo.puntos_disponibles }}
+                    </strong>
+
+                    <span>
+                        puntos para utilizar
+                    </span>
+
+                </div>
+
+
+                <div class="point-card-divider"></div>
+
+
+                <div class="point-card-bottom">
+
+                    <div>
+
+                        <small>
+                            ACUMULADOS
+                        </small>
+
+                        <strong>
+                            {{ saldo.puntos_acumulados }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="point-card-mark">
+                        ECO
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-dashboard-card floating-card-one">
+
+                <div class="floating-card-icon">
+                    🌱
+                </div>
+
+                <div>
+
+                    <strong>
+                        Sigue reciclando
+                    </strong>
+
+                    <small>
+                        Cada acción cuenta
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-dashboard-card floating-card-two">
+
+                <span>
+                    +
+                </span>
+
+                <div>
+
+                    <strong>
+                        Impacto positivo
+                    </strong>
+
+                    <small>
+                        Convierte tus puntos
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         RESUMEN PRINCIPAL
+    ========================================================== -->
+
+    <section class="dashboard-summary-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <span class="dashboard-section-label">
+                    TU ACTIVIDAD
+                </span>
+
+                <h2>
+                    Resumen de tu recorrido
+                </h2>
+
+            </div>
+
+
+            <p>
+                Todo lo que has conseguido a través
+                de EcoRecicla, reunido en un solo lugar.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-stats-grid">
+
+
+            <!-- PUNTOS DISPONIBLES -->
+
+            <article class="dashboard-stat-card stat-green">
+
+                <div class="stat-card-head">
+
+                    <span>
+                        PUNTOS
+                    </span>
+
+                    <div class="stat-card-icon">
+                        ✦
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    {{ saldo.puntos_disponibles }}
+                </strong>
+
+
+                <p>
+                    Disponibles para tus próximos canjes.
+                </p>
+
+
+                <div class="stat-card-line"></div>
+
+            </article>
+
+
+
+            <!-- PUNTOS ACUMULADOS -->
+
+            <article class="dashboard-stat-card stat-blue">
+
+                <div class="stat-card-head">
+
+                    <span>
+                        HISTÓRICO
+                    </span>
+
+                    <div class="stat-card-icon">
+                        ◈
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    {{ saldo.puntos_acumulados }}
+                </strong>
+
+
+                <p>
+                    Puntos acumulados durante tu recorrido.
+                </p>
+
+
+                <div class="stat-card-line"></div>
+
+            </article>
+
+
+
+            <!-- RECICLAJES -->
+
+            <article class="dashboard-stat-card stat-light">
+
+                <div class="stat-card-head">
+
+                    <span>
+                        RECICLAJES
+                    </span>
+
+                    <div class="stat-card-icon">
+                        ♻
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    {{ estadisticas.total_reciclajes }}
+                </strong>
+
+
+                <p>
+                    Registros de reciclaje realizados.
+                </p>
+
+
+                <div class="stat-card-line"></div>
+
+            </article>
+
+
+
+            <!-- PESO -->
+
+            <article class="dashboard-stat-card stat-dark">
+
+                <div class="stat-card-head">
+
+                    <span>
+                        MATERIAL
+                    </span>
+
+                    <div class="stat-card-icon">
+                        ⚖
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    {{ estadisticas.peso_total }}
+                    <small>KG</small>
+                </strong>
+
+
+                <p>
+                    Peso total de material reciclado.
+                </p>
+
+
+                <div class="stat-card-line"></div>
+
+            </article>
+
+
+
+            <!-- CANJES -->
+
+            <article class="dashboard-stat-card stat-reward">
+
+                <div class="stat-card-head">
+
+                    <span>
+                        CANJES
+                    </span>
+
+                    <div class="stat-card-icon">
+                        🎁
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    {{ estadisticas.total_canjes }}
+                </strong>
+
+
+                <p>
+                    Recompensas obtenidas mediante canjes.
+                </p>
+
+
+                <div class="stat-card-line"></div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         BLOQUE DE ACCIONES
+    ========================================================== -->
+
+    <section class="dashboard-actions-section">
+
+        <div class="dashboard-section-header">
+
+            <div>
+
+                <span class="dashboard-section-label">
+                    ACCIONES RÁPIDAS
+                </span>
+
+                <h2>
+                    ¿Qué quieres hacer?
+                </h2>
+
+            </div>
+
+            <p>
+                Accede directamente a las funciones
+                principales de tu cuenta.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-action-grid">
+
+
+            <!-- RECICLAR -->
+
+            <a
+                href="{{ url_for('reciclaje.reciclar') }}"
+                class="dashboard-action-card action-recycle"
+            >
+
+                <div class="action-card-number">
+                    01
+                </div>
+
+
+                <div class="action-card-icon">
+                    ♻
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Registrar reciclaje
+                    </h3>
+
+                    <p>
+                        Registra el material recibido
+                        por EcoRecicla y suma nuevos
+                        puntos a tu cuenta.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-footer">
+
+                    <span>
+                        REGISTRAR
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- RECOMPENSAS -->
+
+            <a
+                href="{{ url_for('recompensa.catalogo') }}"
+                class="dashboard-action-card action-rewards"
+            >
+
+                <div class="action-card-number">
+                    02
+                </div>
+
+
+                <div class="action-card-icon">
+                    🎁
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Explorar recompensas
+                    </h3>
+
+                    <p>
+                        Descubre los beneficios disponibles
+                        y consulta cuáles puedes conseguir
+                        con tus puntos.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-footer">
+
+                    <span>
+                        EXPLORAR
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- HISTORIAL -->
+
+            <a
+                href="{{ url_for('reciclaje.historial') }}"
+                class="dashboard-action-card action-history"
+            >
+
+                <div class="action-card-number">
+                    03
+                </div>
+
+
+                <div class="action-card-icon">
+                    📋
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Consultar historial
+                    </h3>
+
+                    <p>
+                        Revisa tus registros de reciclaje
+                        y observa el recorrido que has
+                        construido.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-footer">
+
+                    <span>
+                        VER HISTORIAL
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- CANJES -->
+
+            <a
+                href="{{ url_for('canje.historial') }}"
+                class="dashboard-action-card action-exchanges"
+            >
+
+                <div class="action-card-number">
+                    04
+                </div>
+
+
+                <div class="action-card-icon">
+                    🏆
+                </div>
+
+
+                <div class="action-card-content">
+
+                    <h3>
+                        Mis canjes
+                    </h3>
+
+                    <p>
+                        Consulta las recompensas que
+                        ya has canjeado y los tickets
+                        generados.
+                    </p>
+
+                </div>
+
+
+                <div class="action-card-footer">
+
+                    <span>
+                        VER CANJES
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+    <script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ==================================================
+           ÚLTIMOS MOVIMIENTOS
+        ================================================== */
+
+        const movementsButton =
+            document.getElementById(
+                "dashboardMovementsMore"
+            );
+
+
+        if (!movementsButton) {
+            return;
+        }
+
+
+        const hiddenMovementRows =
+            document.querySelectorAll(
+                ".movement-hidden-row"
+            );
+
+
+        const movementButtonText =
+            movementsButton.querySelector(
+                ".movement-more-text"
+            );
+
+
+        const movementButtonArrow =
+            movementsButton.querySelector(
+                ".movement-more-arrow"
+            );
+
+
+        const movementCounter =
+            document.querySelector(
+                ".movement-more-counter"
+            );
+
+
+        let movementsExpanded = false;
+
+
+        movementsButton.addEventListener(
+            "click",
+            function () {
+
+
+                movementsExpanded =
+                    !movementsExpanded;
+
+
+                hiddenMovementRows.forEach(
+                    function (row) {
+
+
+                        if (movementsExpanded) {
+
+                            row.classList.add(
+                                "movement-row-visible"
+                            );
+
+                        } else {
+
+                            row.classList.remove(
+                                "movement-row-visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                if (movementsExpanded) {
+
+
+                    movementButtonText.textContent =
+                        "Ver menos";
+
+
+                    movementButtonArrow.textContent =
+                        "↑";
+
+
+                    movementCounter.innerHTML =
+                        'Mostrando <strong>todos</strong> los movimientos';
+
+
+                } else {
+
+
+                    movementButtonText.textContent =
+                        "Ver más";
+
+
+                    movementButtonArrow.textContent =
+                        "↓";
+
+
+                    movementCounter.innerHTML =
+                        'Mostrando <strong>5</strong> de ' +
+                        '<strong>' +
+                        (
+                            hiddenMovementRows.length + 5
+                        ) +
+                        '</strong>';
+
+                }
+
+            }
+        );
+
+    }
+
+);
+
+</script>
+
+
+
+    <!-- =========================================================
+         ÚLTIMOS MOVIMIENTOS
+    ========================================================== -->
+
+    <section class="dashboard-movements-section">
+
+
+        <div class="dashboard-section-header movement-header">
+
+            <div>
+
+                <span class="dashboard-section-label">
+                    ACTIVIDAD RECIENTE
+                </span>
+
+                <h2>
+                    Últimos movimientos
+                </h2>
+
+            </div>
+
+
+            <div class="movement-header-mark">
+                ● LIVE
+            </div>
+
+        </div>
+
+
+
+        {% if movimientos %}
+
+
+        <div class="dashboard-movement-list">
+
+
+                    {% for movimiento in movimientos %}
+
+        <div
+            class="
+                dashboard-movement-row
+                {% if loop.index > 5 %}
+                    movement-hidden-row
+                {% endif %}
+            "
+            data-movement-index="{{ loop.index }}"
+        >
+
+            <!-- =====================================================
+                INFORMACIÓN DEL MOVIMIENTO
+            ====================================================== -->
+
+            <div class="movement-main-info">
+
+                <div class="movement-icon">
+
+                    {% if movimiento.tipo == "CANJE" %}
+                        🎁
+                    {% elif movimiento.tipo == "RECICLAJE" %}
+                        ♻
+                    {% else %}
+                        •
+                    {% endif %}
+
+                </div>
+
+
+                <div class="movement-description">
+
+                    <strong>
+                        {{ movimiento.descripcion }}
+                    </strong>
+
+                    <small>
+                        {{ movimiento.fecha }}
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================================
+                TIPO
+            ====================================================== -->
+
+            <div class="movement-type">
+
+                {{ movimiento.tipo }}
+
+            </div>
+
+
+            <!-- =====================================================
+                PUNTOS
+            ====================================================== -->
+
+            <div
+                class="
+                    movement-points
+                    {% if movimiento.puntos > 0 %}
+                        movement-positive
+                    {% else %}
+                        movement-negative
+                    {% endif %}
+                "
+            >
+
+                {% if movimiento.puntos > 0 %}
+                    +
+                {% endif %}
+
+                {{ movimiento.puntos }}
+
+                <small>
+                    pts
+                </small>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+            {% if movimientos|length > 5 %}
+
+    <div class="dashboard-movements-more">
+
+        <button
+            type="button"
+            id="dashboardMovementsMore"
+            class="dashboard-movements-more-button"
+        >
+
+            <span class="movement-more-icon">
+                +
+            </span>
+
+            <span class="movement-more-text">
+                Ver más
+            </span>
+
+            <span class="movement-more-arrow">
+                ↓
+            </span>
+
+        </button>
+
+
+        <span class="movement-more-counter">
+
+            Mostrando
+            <strong>5</strong>
+            de
+            <strong>{{ movimientos|length }}</strong>
+
+        </span>
+
+    </div>
+
+    {% endif %}
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- ESTADO VACÍO -->
+
+        <div class="dashboard-empty-state">
+
+            <div class="empty-state-icon">
+                🌱
+            </div>
+
+
+            <div>
+
+                <span>
+                    TU ACTIVIDAD
+                </span>
+
+                <h3>
+                    Tu recorrido apenas comienza
+                </h3>
+
+                <p>
+                    Cuando registres tu primer reciclaje
+                    aparecerá aquí el movimiento generado.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('reciclaje.reciclar') }}"
+            >
+                Empezar →
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+        <!-- =========================================================
+        ÚLTIMOS CANJES
+    ========================================================== -->
+
+    <section class="dashboard-redemptions-section">
+
+        <div class="dashboard-redemptions-header">
+
+            <div>
+
+                <span class="dashboard-section-label">
+                    ACTIVIDAD DE RECOMPENSAS
+                </span>
+
+                <h2>
+                    Mis últimos canjes
+                </h2>
+
+                <p>
+                    Consulta rápidamente las recompensas que
+                    has obtenido utilizando tus puntos.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('canje.historial') }}"
+                class="dashboard-redemptions-history"
+            >
+
+                <span>
+                    Ver historial completo
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+            </a>
+
+        </div>
+
+
+        {% if canjes %}
+
+        <div class="dashboard-redemptions-table-card">
+
+            <div class="dashboard-redemptions-table-head">
+
+                <div>
+                    <span>
+                        RECOMPENSA
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        EMPRESA
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        PUNTOS
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        FECHA
+                    </span>
+                </div>
+
+                <div>
+                    <span>
+                        ESTADO
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-redemptions-rows">
+
+                {% for canje in canjes %}
+
+                <div
+                    class="
+                        dashboard-redemption-row
+                        {% if loop.index > 5 %}
+                            redemption-hidden-row
+                        {% endif %}
+                    "
+                    data-redemption-index="{{ loop.index }}"
+                >
+
+                    <!-- RECOMPENSA -->
+
+                    <div class="redemption-reward-cell">
+
+                        <div class="redemption-mini-icon">
+                            🎁
+                        </div>
+
+                        <div class="redemption-reward-info">
+
+                            <strong>
+                                {{ canje.recompensa }}
+                            </strong>
+
+                            <small>
+                                Canje #{{ canje.id_canje }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMPRESA -->
+
+                    <div class="redemption-company-cell">
+
+                        {% if canje.empresa %}
+
+                            <span class="redemption-company-dot"></span>
+
+                            <span>
+                                {{ canje.empresa }}
+                            </span>
+
+                        {% else %}
+
+                            <span class="redemption-no-company">
+                                EcoRecicla
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- PUNTOS -->
+
+                    <div class="redemption-points-cell">
+
+                        <strong>
+                            {{ canje.puntos_utilizados }}
+                        </strong>
+
+                        <small>
+                            pts
+                        </small>
+
+                    </div>
+
+
+                    <!-- FECHA -->
+
+                    <div class="redemption-date-cell">
+
+                        <strong>
+                            {{ canje.fecha_canje.strftime('%d/%m/%Y') if canje.fecha_canje else '—' }}
+                        </strong>
+
+                        <small>
+                            {{ canje.fecha_canje.strftime('%H:%M') if canje.fecha_canje else '' }}
+                        </small>
+
+                    </div>
+
+
+                    <!-- ESTADO -->
+
+                    <div class="redemption-status-cell">
+
+                        {% if canje.estado == "GENERADO" %}
+
+                            <span class="redemption-status status-generated">
+
+                                <i></i>
+
+                                Generado
+
+                            </span>
+
+                        {% elif canje.estado == "ENTREGADO" %}
+
+                            <span class="redemption-status status-delivered">
+
+                                <i></i>
+
+                                Entregado
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="redemption-status status-other">
+
+                                <i></i>
+
+                                {{ canje.estado }}
+
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- =================================================
+                BOTÓN VER MÁS
+            ================================================== -->
+
+            {% if canjes|length > 5 %}
+
+            <div class="dashboard-redemptions-more">
+
+                <button
+                    type="button"
+                    id="dashboardRedemptionsMore"
+                    class="dashboard-redemptions-more-button"
+                >
+
+                    <span class="more-button-icon">
+                        +
+                    </span>
+
+                    <span class="more-button-text">
+                        Ver más
+                    </span>
+
+                    <span class="more-button-arrow">
+                        ↓
+                    </span>
+
+                </button>
+
+                <span class="more-button-counter">
+                    Mostrando <strong>5</strong> de
+                    <strong>{{ canjes|length }}</strong>
+                </span>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        {% else %}
+
+        <!-- =====================================================
+            ESTADO VACÍO
+        ====================================================== -->
+
+        <div class="dashboard-redemptions-empty">
+
+            <div class="redemptions-empty-icon">
+                🎁
+            </div>
+
+            <div>
+
+                <span>
+                    AÚN NO HAY CANJES
+                </span>
+
+                <h3>
+                    Tu primera recompensa está esperando.
+                </h3>
+
+                <p>
+                    Cuando utilices tus puntos para obtener una
+                    recompensa, aparecerá aquí automáticamente.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('recompensa.catalogo') }}"
+            >
+                Explorar recompensas
+                <strong>→</strong>
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+
+
+    <!-- =========================================================
+         EDUCACIÓN SOBRE RECICLAJE
+    ========================================================== -->
+
+    <section class="dashboard-education-section">
+
+
+        <div class="education-intro">
+
+            <span class="dashboard-section-label">
+                APRENDE · RECICLA · TRANSFORMA
+            </span>
+
+
+            <h2>
+                Reciclar bien también
+                es parte del proceso.
+            </h2>
+
+
+            <p>
+                Una buena separación desde el origen facilita
+                el aprovechamiento de los materiales y ayuda
+                a que más residuos puedan volver a utilizarse.
+            </p>
+
+        </div>
+
+
+
+        <div class="education-cards">
+
+
+            <article class="education-card">
+
+                <div class="education-number">
+                    01
+                </div>
+
+                <div class="education-icon">
+                    🧹
+                </div>
+
+                <h3>
+                    Separa
+                </h3>
+
+                <p>
+                    Evita mezclar materiales diferentes
+                    cuando sea posible. La separación
+                    facilita su clasificación posterior.
+                </p>
+
+            </article>
+
+
+
+            <article class="education-card">
+
+                <div class="education-number">
+                    02
+                </div>
+
+                <div class="education-icon">
+                    💧
+                </div>
+
+                <h3>
+                    Limpia
+                </h3>
+
+                <p>
+                    Los envases deben entregarse sin
+                    restos importantes de comida o bebida
+                    para facilitar su aprovechamiento.
+                </p>
+
+            </article>
+
+
+
+            <article class="education-card">
+
+                <div class="education-number">
+                    03
+                </div>
+
+                <div class="education-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Acondiciona
+                </h3>
+
+                <p>
+                    Aplastar o acomodar determinados envases
+                    puede ayudar a reducir el espacio ocupado
+                    durante su almacenamiento.
+                </p>
+
+            </article>
+
+
+
+            <article class="education-card">
+
+                <div class="education-number">
+                    04
+                </div>
+
+                <div class="education-icon">
+                    ♻
+                </div>
+
+                <h3>
+                    Entrega
+                </h3>
+
+                <p>
+                    Lleva los materiales al punto o sistema
+                    de recepción correspondiente y registra
+                    correctamente tu reciclaje.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         CICLO ECO
+    ========================================================== -->
+
+    <section class="dashboard-cycle-section">
+
+
+        <div class="cycle-heading">
+
+            <span class="dashboard-section-label">
+                EL CICLO ECORECICLA
+            </span>
+
+            <h2>
+                De residuo a recompensa.
+            </h2>
+
+            <p>
+                Tu participación conecta el reciclaje
+                con un sistema de puntos y beneficios.
+            </p>
+
+        </div>
+
+
+
+        <div class="cycle-track">
+
+
+            <div class="cycle-item">
+
+                <div class="cycle-circle">
+                    01
+                </div>
+
+                <div>
+
+                    <strong>
+                        Reciclas
+                    </strong>
+
+                    <small>
+                        Entregas material
+                        aprovechable.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span class="cycle-arrow">
+                →
+            </span>
+
+
+            <div class="cycle-item">
+
+                <div class="cycle-circle">
+                    02
+                </div>
+
+                <div>
+
+                    <strong>
+                        Registras
+                    </strong>
+
+                    <small>
+                        El sistema registra
+                        tu operación.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span class="cycle-arrow">
+                →
+            </span>
+
+
+            <div class="cycle-item">
+
+                <div class="cycle-circle">
+                    03
+                </div>
+
+                <div>
+
+                    <strong>
+                        Acumulas
+                    </strong>
+
+                    <small>
+                        Obtienes puntos
+                        por tu actividad.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <span class="cycle-arrow">
+                →
+            </span>
+
+
+            <div class="cycle-item">
+
+                <div class="cycle-circle">
+                    04
+                </div>
+
+                <div>
+
+                    <strong>
+                        Canjeas
+                    </strong>
+
+                    <small>
+                        Utilizas tus puntos
+                        en recompensas.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         LLAMADO FINAL
+    ========================================================== -->
+
+    <section class="dashboard-final-cta">
+
+
+        <div class="final-cta-decoration final-decoration-one"></div>
+        <div class="final-cta-decoration final-decoration-two"></div>
+
+
+        <div class="final-cta-icon">
+            ♻
+        </div>
+
+
+        <div class="final-cta-copy">
+
+            <span>
+                TU PRÓXIMA ACCIÓN
+            </span>
+
+            <h2>
+                Cada kilo cuenta.
+                Cada acción suma.
+            </h2>
+
+            <p>
+                Continúa construyendo tu recorrido en
+                EcoRecicla y convierte tus hábitos de
+                reciclaje en nuevas oportunidades.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('reciclaje.reciclar') }}"
+            class="final-cta-button"
+        >
+            Registrar reciclaje
+            <strong>→</strong>
+        </a>
+
+    </section>
+
+
+</div>
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const moreButton =
+            document.getElementById(
+                "dashboardRedemptionsMore"
+            );
+
+        if (!moreButton) {
+            return;
+        }
+
+
+        const hiddenRows =
+            document.querySelectorAll(
+                ".redemption-hidden-row"
+            );
+
+
+        const buttonText =
+            moreButton.querySelector(
+                ".more-button-text"
+            );
+
+
+        const buttonArrow =
+            moreButton.querySelector(
+                ".more-button-arrow"
+            );
+
+
+        const counter =
+            document.querySelector(
+                ".more-button-counter"
+            );
+
+
+        let expanded = false;
+
+
+        moreButton.addEventListener(
+            "click",
+            function () {
+
+                expanded = !expanded;
+
+
+                hiddenRows.forEach(
+                    function (row) {
+
+                        if (expanded) {
+
+                            row.classList.add(
+                                "redemption-row-visible"
+                            );
+
+                        } else {
+
+                            row.classList.remove(
+                                "redemption-row-visible"
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                if (expanded) {
+
+                    buttonText.textContent =
+                        "Ver menos";
+
+                    buttonArrow.textContent =
+                        "↑";
+
+                    counter.innerHTML =
+                        'Mostrando <strong>todos</strong> los canjes';
+
+                } else {
+
+                    buttonText.textContent =
+                        "Ver más";
+
+                    buttonArrow.textContent =
+                        "↓";
+
+                    counter.innerHTML =
+                        'Mostrando <strong>5</strong> de ' +
+                        '<strong>' +
+                        (hiddenRows.length + 5) +
+                        '</strong>';
+
+                }
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+{% endblock %}
