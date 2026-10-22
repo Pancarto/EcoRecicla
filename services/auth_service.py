@@ -64,6 +64,12 @@ def registrar_usuario(
         password_hash = generate_password_hash(password)
 
         # ----------------------------------------------------
+        # Obtener manualmente el siguiente id_usuario (para TiDB Cloud)
+        # ----------------------------------------------------
+        cursor.execute("SELECT COALESCE(MAX(id_usuario), 0) + 1 FROM usuarios")
+        id_usuario = cursor.fetchone()[0]
+
+        # ----------------------------------------------------
         # Crear usuario
         # Rol 1 = USUARIO
         # ----------------------------------------------------
@@ -71,6 +77,7 @@ def registrar_usuario(
         cursor.execute(
             """
             INSERT INTO usuarios (
+                id_usuario,
                 id_rol,
                 id_tipo_documento,
                 numero_documento,
@@ -80,9 +87,10 @@ def registrar_usuario(
                 telefono,
                 password_hash
             )
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
             (
+                id_usuario,
                 1,
                 id_tipo_documento,
                 numero_documento,
@@ -93,8 +101,6 @@ def registrar_usuario(
                 password_hash
             )
         )
-
-        id_usuario = cursor.lastrowid
 
         # ----------------------------------------------------
         # Crear saldo inicial

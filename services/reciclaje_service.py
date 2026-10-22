@@ -103,12 +103,24 @@ def registrar_reciclaje(
         codigo = generar_codigo_reciclaje()
 
         # ====================================================
+        # OBTENER MANUALMENTE id_reciclaje (para TiDB Cloud)
+        # ====================================================
+        cursor.execute("SELECT COALESCE(MAX(id_reciclaje), 0) + 1 FROM reciclajes")
+        id_reciclaje = cursor.fetchone()
+        # Manejo por si el cursor es dictionary=True o tupla normal
+        if isinstance(id_reciclaje, dict):
+            id_reciclaje = list(id_reciclaje.values())[0]
+        else:
+            id_reciclaje = id_reciclaje[0]
+
+        # ====================================================
         # CREAR RECICLAJE
         # ====================================================
 
         cursor.execute(
             """
             INSERT INTO reciclajes (
+                id_reciclaje,
                 id_usuario,
                 id_maquina,
                 peso_total,
@@ -122,10 +134,12 @@ def registrar_reciclaje(
                 %s,
                 %s,
                 %s,
+                %s,
                 'REGISTRADO'
             )
             """,
             (
+                id_reciclaje,
                 id_usuario,
                 id_maquina,
                 peso,
@@ -134,10 +148,8 @@ def registrar_reciclaje(
             )
         )
 
-        id_reciclaje = cursor.lastrowid
-
         # ====================================================
-        # CREAR DETALLE
+        # CREAR DETALLE (Si tiene id_detalle autoincrementable o similar, validemos)
         # ====================================================
 
         cursor.execute(
@@ -187,12 +199,23 @@ def registrar_reciclaje(
         )
 
         # ====================================================
+        # OBTENER MANUALMENTE id_movimiento (para TiDB Cloud)
+        # ====================================================
+        cursor.execute("SELECT COALESCE(MAX(id_movimiento), 0) + 1 FROM movimientos_puntos")
+        id_movimiento = cursor.fetchone()
+        if isinstance(id_movimiento, dict):
+            id_movimiento = list(id_movimiento.values())[0]
+        else:
+            id_movimiento = id_movimiento[0]
+
+        # ====================================================
         # REGISTRAR MOVIMIENTO
         # ====================================================
 
         cursor.execute(
             """
             INSERT INTO movimientos_puntos (
+                id_movimiento,
                 id_usuario,
                 id_tipo_movimiento,
                 puntos,
@@ -201,6 +224,7 @@ def registrar_reciclaje(
             )
             VALUES (
                 %s,
+                %s,
                 1,
                 %s,
                 %s,
@@ -208,6 +232,7 @@ def registrar_reciclaje(
             )
             """,
             (
+                id_movimiento,
                 id_usuario,
                 puntos,
                 f"Reciclaje de {material['nombre']}",
