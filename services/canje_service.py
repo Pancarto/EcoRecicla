@@ -285,8 +285,16 @@ def realizar_canje(id_usuario, id_recompensa):
 
 
         # ====================================================
-        # 10. CREAR CANJE (CORREGIDO PARA TIDB CLOUD)
+        # 10. CREAR CANJE (CON ID MANUAL SEGURO)
         # ====================================================
+
+        cursor.execute(
+            """
+            SELECT COALESCE(MAX(id_canje), 0) + 1 AS next_id FROM canjes
+            """
+        )
+        res_id = cursor.fetchone()
+        id_canje = res_id["next_id"] if res_id and "next_id" in res_id else 1
 
         cursor.execute(
             """
@@ -298,17 +306,10 @@ def realizar_canje(id_usuario, id_recompensa):
                 codigo_ticket,
                 estado
             )
-
-            VALUES (
-                (SELECT COALESCE(MAX(c.id_canje), 0) + 1 FROM canjes c),
-                %s,
-                %s,
-                %s,
-                %s,
-                'GENERADO'
-            )
+            VALUES (%s, %s, %s, %s, %s, 'GENERADO')
             """,
             (
+                id_canje,
                 id_usuario,
                 id_recompensa,
                 puntos_necesarios,
@@ -316,19 +317,18 @@ def realizar_canje(id_usuario, id_recompensa):
             )
         )
 
-        # Obtenemos el id_canje insertado de forma segura
-        cursor.execute("SELECT MAX(id_canje) AS max_id FROM canjes")
-        res_id = cursor.fetchone()
-        id_canje = res_id["max_id"] if res_id and res_id["max_id"] else 1
-
 
         # ====================================================
-        # 11. REGISTRAR MOVIMIENTO DE PUNTOS (CORREGIDO ID MANUAL)
+        # 11. REGISTRAR MOVIMIENTO DE PUNTOS (CON ID MANUAL SEGURO)
         # ====================================================
 
-        cursor.execute("SELECT COALESCE(MAX(id_movimiento), 0) + 1 FROM movimientos_puntos")
+        cursor.execute(
+            """
+            SELECT COALESCE(MAX(id_movimiento), 0) + 1 AS next_mov FROM movimientos_puntos
+            """
+        )
         res_mov = cursor.fetchone()
-        id_movimiento = res_mov["max_id"] if res_mov and res_mov["max_id"] else 1
+        id_movimiento = res_mov["next_mov"] if res_mov and "next_mov" in res_mov else 1
 
         cursor.execute(
             """
@@ -340,15 +340,7 @@ def realizar_canje(id_usuario, id_recompensa):
                 descripcion,
                 id_canje
             )
-
-            VALUES (
-                %s,
-                %s,
-                %s,
-                %s,
-                %s,
-                %s
-            )
+            VALUES (%s, %s, %s, %s, %s, %s)
             """,
             (
                 id_movimiento,
