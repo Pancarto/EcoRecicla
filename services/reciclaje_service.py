@@ -105,13 +105,9 @@ def registrar_reciclaje(
         # ====================================================
         # OBTENER MANUALMENTE id_reciclaje (para TiDB Cloud)
         # ====================================================
-        cursor.execute("SELECT COALESCE(MAX(id_reciclaje), 0) + 1 FROM reciclajes")
-        id_reciclaje = cursor.fetchone()
-        # Manejo por si el cursor es dictionary=True o tupla normal
-        if isinstance(id_reciclaje, dict):
-            id_reciclaje = list(id_reciclaje.values())[0]
-        else:
-            id_reciclaje = id_reciclaje[0]
+        cursor.execute("SELECT COALESCE(MAX(id_reciclaje), 0) + 1 AS next_id FROM reciclajes")
+        res_rec = cursor.fetchone()
+        id_reciclaje = res_rec["next_id"] if res_rec and "next_id" in res_rec else 1
 
         # ====================================================
         # CREAR RECICLAJE
@@ -149,12 +145,20 @@ def registrar_reciclaje(
         )
 
         # ====================================================
-        # CREAR DETALLE (Si tiene id_detalle autoincrementable o similar, validemos)
+        # OBTENER MANUALMENTE id_detalle_reciclaje (para TiDB Cloud)
+        # ====================================================
+        cursor.execute("SELECT COALESCE(MAX(id_detalle_reciclaje), 0) + 1 AS next_det FROM detalle_reciclaje")
+        res_det = cursor.fetchone()
+        id_detalle = res_det["next_det"] if res_det and "next_det" in res_det else 1
+
+        # ====================================================
+        # CREAR DETALLE
         # ====================================================
 
         cursor.execute(
             """
             INSERT INTO detalle_reciclaje (
+                id_detalle_reciclaje,
                 id_reciclaje,
                 id_tipo_material,
                 cantidad,
@@ -164,10 +168,12 @@ def registrar_reciclaje(
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
             )
             """,
             (
+                id_detalle,
                 id_reciclaje,
                 id_tipo_material,
                 peso,
@@ -201,12 +207,9 @@ def registrar_reciclaje(
         # ====================================================
         # OBTENER MANUALMENTE id_movimiento (para TiDB Cloud)
         # ====================================================
-        cursor.execute("SELECT COALESCE(MAX(id_movimiento), 0) + 1 FROM movimientos_puntos")
-        id_movimiento = cursor.fetchone()
-        if isinstance(id_movimiento, dict):
-            id_movimiento = list(id_movimiento.values())[0]
-        else:
-            id_movimiento = id_movimiento[0]
+        cursor.execute("SELECT COALESCE(MAX(id_movimiento), 0) + 1 AS next_mov FROM movimientos_puntos")
+        res_mov = cursor.fetchone()
+        id_movimiento = res_mov["next_mov"] if res_mov and "next_mov" in res_mov else 1
 
         # ====================================================
         # REGISTRAR MOVIMIENTO
