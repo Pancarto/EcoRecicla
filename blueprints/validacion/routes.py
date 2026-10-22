@@ -1,7 +1,7 @@
 # ============================================================
 # ECORECICLA - BLUEPRINT DE VALIDACIÓN
 # ============================================================
- 
+
 from flask import (
     Blueprint,
     render_template,
@@ -11,7 +11,6 @@ from flask import (
     flash,
     session
 )
-
 
 from services.validacion_service import (
     validar_ticket,
@@ -26,8 +25,6 @@ validacion_bp = Blueprint(
     __name__,
     url_prefix="/validacion"
 )
-
-
 
 
 # ============================================================
@@ -94,6 +91,8 @@ def validar():
         "validacion/validar_ticket.html",
         ticket=ticket
     )
+
+
 # ============================================================
 # CONFIRMAR ENTREGA
 # ============================================================
@@ -151,9 +150,9 @@ def historial():
                 r.nombre AS recompensa,
 
                 CONCAT(
-                    u.nombres,
+                    u.nombre,
                     ' ',
-                    u.apellidos
+                    u.apellido
                 ) AS usuario
 
             FROM canjes c
