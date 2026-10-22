@@ -323,12 +323,17 @@ def realizar_canje(id_usuario, id_recompensa):
 
 
         # ====================================================
-        # 11. REGISTRAR MOVIMIENTO DE PUNTOS
+        # 11. REGISTRAR MOVIMIENTO DE PUNTOS (CORREGIDO ID MANUAL)
         # ====================================================
+
+        cursor.execute("SELECT COALESCE(MAX(id_movimiento), 0) + 1 FROM movimientos_puntos")
+        res_mov = cursor.fetchone()
+        id_movimiento = res_mov["max_id"] if res_mov and res_mov["max_id"] else 1
 
         cursor.execute(
             """
             INSERT INTO movimientos_puntos (
+                id_movimiento,
                 id_usuario,
                 id_tipo_movimiento,
                 puntos,
@@ -341,15 +346,16 @@ def realizar_canje(id_usuario, id_recompensa):
                 %s,
                 %s,
                 %s,
+                %s,
                 %s
             )
             """,
             (
+                id_movimiento,
                 id_usuario,
                 id_tipo_movimiento,
                 puntos_necesarios * -1,
-                f"Canje de recompensa: "
-                f"{recompensa['nombre']}",
+                f"Canje de recompensa: {recompensa['nombre']}",
                 id_canje
             )
         )
