@@ -19,13 +19,11 @@ def obtener_usuarios():
         cursor.execute("""
             SELECT
                 u.id_usuario,
-                u.numero_documento,
-                u.nombres,
-                u.apellidos,
-                u.correo,
+                u.nombre,
+                u.apellido,
+                u.email,
                 u.telefono,
                 u.fecha_registro,
-                u.ultimo_acceso,
                 u.estado,
 
                 r.nombre AS rol

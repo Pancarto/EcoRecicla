@@ -31,9 +31,9 @@ def buscar_ticket(codigo_ticket):
                 r.descripcion AS descripcion_recompensa,
 
                 CONCAT(
-                    u.nombres,
+                    u.nombre,
                     ' ',
-                    u.apellidos
+                    u.apellido
                 ) AS usuario_nombre,
 
                 ea.nombre AS empresa
