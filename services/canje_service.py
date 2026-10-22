@@ -25,10 +25,6 @@ def generar_codigo_ticket():
 
 
 # ============================================================
-# OBTENER TIPO DE MOVIMIENTO DE CANJE
-# ============================================================
-
-# ============================================================
 # OBTENER TIPO DE MOVIMIENTO PARA CANJE
 # ============================================================
 
@@ -289,12 +285,13 @@ def realizar_canje(id_usuario, id_recompensa):
 
 
         # ====================================================
-        # 10. CREAR CANJE
+        # 10. CREAR CANJE (CORREGIDO PARA TIDB CLOUD)
         # ====================================================
 
         cursor.execute(
             """
             INSERT INTO canjes (
+                id_canje,
                 id_usuario,
                 id_recompensa,
                 puntos_utilizados,
@@ -303,6 +300,7 @@ def realizar_canje(id_usuario, id_recompensa):
             )
 
             VALUES (
+                (SELECT COALESCE(MAX(c.id_canje), 0) + 1 FROM canjes c),
                 %s,
                 %s,
                 %s,
@@ -318,7 +316,10 @@ def realizar_canje(id_usuario, id_recompensa):
             )
         )
 
-        id_canje = cursor.lastrowid
+        # Obtenemos el id_canje insertado de forma segura
+        cursor.execute("SELECT MAX(id_canje) AS max_id FROM canjes")
+        res_id = cursor.fetchone()
+        id_canje = res_id["max_id"] if res_id and res_id["max_id"] else 1
 
 
         # ====================================================
